@@ -25,7 +25,13 @@ handler.get(async (req, res) => {
 
     const pages = Math.ceil(total / pageSize)
 
-    query = query.skip(skip).limit(pageSize).sort({ createdAt: -1 }).lean()
+    query = query
+      .skip(skip)
+      .limit(pageSize)
+      .sort({ createdAt: -1 })
+      .lean()
+      .populate('department')
+      .populate('position')
 
     const result = await query
 
@@ -46,6 +52,11 @@ handler.get(async (req, res) => {
 handler.post(async (req, res) => {
   await db()
   try {
+    const empId = req.body.employeeId
+
+    if (empId.toString().substring(0, 5) !== 'YH-A0')
+      return res.status(400).json({ error: 'Invalid ID format' })
+
     const exist = await schemaName.findOne({
       employeeId: {
         $regex: `^${req.body?.employeeId?.trim()}$`,

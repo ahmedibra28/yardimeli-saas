@@ -14,20 +14,23 @@ handler.put(async (req, res) => {
     const { id } = req.query
     const {
       employeeId,
-      // name,
-      // gender,
-      // mobile,
-      // contract,
-      // email,
-      // hiredDate,
-      // nationality,
-      // dob,
-      // position,
-      // department,
-      // bankName,
-      // bankAccount,
-      // active,
+      name,
+      gender,
+      mobile,
+      contract,
+      email,
+      hiredDate,
+      nationality,
+      dob,
+      position,
+      department,
+      bankName,
+      bankAccount,
+      active,
     } = req.body
+
+    if (employeeId.toString().substring(0, 5) !== 'YH-A0')
+      return res.status(400).json({ error: 'Invalid ID format' })
 
     const object = await schemaName.findById(id)
     if (!object)
@@ -44,8 +47,21 @@ handler.put(async (req, res) => {
     if (exist)
       return res.status(400).json({ error: 'Duplicate value detected' })
 
-    object = req.body
     object.employeeId = employeeId
+    object.name = name
+    object.gender = gender
+    object.mobile = mobile
+    object.contract = contract
+    object.email = email
+    object.hiredDate = hiredDate
+    object.nationality = nationality
+    object.dob = dob
+    object.position = position
+    object.department = department
+    object.bankName = bankName
+    object.bankAccount = bankAccount
+    object.active = active
+
     object.updatedBy = req.user.id
     await object.save()
     res.status(200).json({ message: `${schemaNameString} updated` })

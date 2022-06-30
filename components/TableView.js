@@ -59,7 +59,8 @@ const TableView = (props) => {
             {table.header.map((item, index) => (
               <th key={index}>{item}</th>
             ))}
-            {table.createdAt && <th>CreatedAt</th>}
+            {table.createdAt && <th>Created At</th>}
+            {table.hiredDate && <th>Hired Date</th>}
             {table.confirmed && <th>Confirmed</th>}
             {table.blocked && <th>Blocked</th>}
             {table.auth && <th>Auth</th>}
@@ -91,6 +92,9 @@ const TableView = (props) => {
 
                 {table.createdAt && (
                   <td>{moment(item.createdAt).format('lll')}</td>
+                )}
+                {table.hiredDate && (
+                  <td>{moment(item.hiredDate).format('lll')}</td>
                 )}
 
                 {table.confirmed && (

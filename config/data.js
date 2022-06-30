@@ -126,7 +126,7 @@ const clientPermissions = [
   },
   {
     name: 'Position',
-    path: '/personnel/departments',
+    path: '/personnel/positions',
     menu: 'personnel',
     auth: true,
     description: 'Position page',
@@ -477,7 +477,7 @@ const permissions = [
   },
   {
     description: 'Delete Employee',
-    route: '/api/personnel/employees:id',
+    route: '/api/personnel/employees/:id',
     auth: true,
     name: 'Employee',
     method: 'DELETE',
@@ -507,7 +507,7 @@ const permissions = [
   },
   {
     description: 'Delete Department',
-    route: '/api/personnel/departments:id',
+    route: '/api/personnel/departments/:id',
     auth: true,
     name: 'Department',
     method: 'DELETE',
@@ -537,7 +537,7 @@ const permissions = [
   },
   {
     description: 'Delete Position',
-    route: '/api/personnel/positions:id',
+    route: '/api/personnel/positions/:id',
     auth: true,
     name: 'Position',
     method: 'DELETE',
@@ -567,7 +567,7 @@ const permissions = [
   },
   {
     description: 'Delete Resign',
-    route: '/api/personnel/resigns:id',
+    route: '/api/personnel/resigns/:id',
     auth: true,
     name: 'Resign',
     method: 'DELETE',
@@ -597,7 +597,7 @@ const permissions = [
   },
   {
     description: 'Delete Leave',
-    route: '/api/personnel/leaves:id',
+    route: '/api/personnel/leaves/:id',
     auth: true,
     name: 'Leave',
     method: 'DELETE',
@@ -626,7 +626,7 @@ const permissions = [
   },
   {
     description: 'Delete Resource',
-    route: '/api/personnel/resources:id',
+    route: '/api/personnel/resources/:id',
     auth: true,
     name: 'Resource',
     method: 'DELETE',
@@ -656,7 +656,7 @@ const permissions = [
   },
   {
     description: 'Delete Write Up',
-    route: '/api/personnel/writeups:id',
+    route: '/api/personnel/writeups/:id',
     auth: true,
     name: 'Write Up',
     method: 'DELETE',
