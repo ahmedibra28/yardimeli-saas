@@ -341,6 +341,7 @@ export const InputAutoCompleteSelect = (args) => {
     data,
     label,
     isRequired = true,
+    value,
   } = args
 
   return (
@@ -362,7 +363,7 @@ export const InputAutoCompleteSelect = (args) => {
         {data &&
           data.map((d) => (
             <option key={d._id} value={d._id}>
-              {d.name}
+              {`${value && d[value] + ' - '}  ${d.name}`}
             </option>
           ))}
       </datalist>

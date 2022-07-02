@@ -11,7 +11,7 @@ const writeUpScheme = mongoose.Schema(
     },
     offenseCommitted: { type: String, required: true },
     actionPlan: { type: String, required: true },
-    description: { type: String, required: true },
+    date: { type: Date, required: true },
 
     // default properties
     createdBy: {

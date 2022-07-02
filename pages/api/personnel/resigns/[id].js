@@ -1,6 +1,7 @@
 import nc from 'next-connect'
 import db from '../../../../config/db'
 import Resign from '../../../../models/Resign'
+import Employee from '../../../../models/Employee'
 import { isAuth } from '../../../../utils/auth'
 
 const schemaName = Resign
@@ -12,16 +13,16 @@ handler.put(async (req, res) => {
   await db()
   try {
     const { id } = req.query
-    const { endDate, startDate } = req.body
+    const { employee, type, reason, date } = req.body
 
     const object = await schemaName.findById(id)
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
-    if (endDate < startDate)
-      return res.status(400).send('End date must be after start date')
-
-    object = req.body
+    object.employee = employee
+    object.type = type
+    object.reason = reason
+    object.date = date
     object.updatedBy = req.user.id
     await object.save()
     res.status(200).json({ message: `${schemaNameString} updated` })
@@ -37,6 +38,15 @@ handler.delete(async (req, res) => {
     const object = await schemaName.findById(id)
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
+
+    const employee = await Employee.findOne({
+      employee: req.body.employee,
+    })
+
+    if (employee) {
+      employee.status = 'active'
+      await employee.save()
+    }
 
     await object.remove()
     res.status(200).json({ message: `${schemaNameString} removed` })

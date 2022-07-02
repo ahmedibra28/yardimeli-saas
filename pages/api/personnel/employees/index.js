@@ -13,14 +13,28 @@ handler.get(async (req, res) => {
     const q = req.query && req.query.q
 
     let query = schemaName.find(
-      q ? { employeeId: { $regex: q, $options: 'i' } } : { status: 'active' }
+      q
+        ? {
+            $or: [
+              { employeeId: { $regex: q, $options: 'i' } },
+              { name: { $regex: q, $options: 'i' } },
+            ],
+          }
+        : {}
     )
 
     const page = parseInt(req.query.page) || 1
     const pageSize = parseInt(req.query.limit) || 25
     const skip = (page - 1) * pageSize
     const total = await schemaName.countDocuments(
-      q ? { employeeId: { $regex: q, $options: 'i' } } : { status: 'active' }
+      q
+        ? {
+            $or: [
+              { employeeId: { $regex: q, $options: 'i' } },
+              { name: { $regex: q, $options: 'i' } },
+            ],
+          }
+        : {}
     )
 
     const pages = Math.ceil(total / pageSize)
@@ -30,8 +44,8 @@ handler.get(async (req, res) => {
       .limit(pageSize)
       .sort({ createdAt: -1 })
       .lean()
-      .populate('department')
-      .populate('position')
+      .populate('department', 'name')
+      .populate('position', 'name')
 
     const result = await query
 

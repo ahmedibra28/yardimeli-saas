@@ -26,7 +26,6 @@ handler.put(async (req, res) => {
       department,
       bankName,
       bankAccount,
-      active,
     } = req.body
 
     if (employeeId.toString().substring(0, 5) !== 'YH-A0')
@@ -60,10 +59,10 @@ handler.put(async (req, res) => {
     object.department = department
     object.bankName = bankName
     object.bankAccount = bankAccount
-    object.active = active
 
     object.updatedBy = req.user.id
     await object.save()
+
     res.status(200).json({ message: `${schemaNameString} updated` })
   } catch (error) {
     res.status(500).json({ error: error.message })

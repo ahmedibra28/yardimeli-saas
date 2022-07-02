@@ -4,39 +4,29 @@ import dynamic from 'next/dynamic'
 import withAuth from '../../HOC/withAuth'
 import { confirmAlert } from 'react-confirm-alert'
 import { useForm } from 'react-hook-form'
+import useLeavesHook from '../../utils/api/leaves'
 import useEmployeesHook from '../../utils/api/employees'
-import useDepartmentsHook from '../../utils/api/departments'
-import usePositionsHook from '../../utils/api/positions'
 import { Spinner, Pagination, Message, Confirm } from '../../components'
 import {
-  dynamicInputSelect,
+  InputAutoCompleteSelect,
   inputDate,
-  inputEmail,
-  inputNumber,
-  inputText,
+  inputTextArea,
   staticInputSelect,
 } from '../../utils/dynamicForm'
 import TableView from '../../components/TableView'
 import FormView from '../../components/FormView'
-import moment from 'moment'
 
-const Employees = () => {
+const Leaves = () => {
   const [page, setPage] = useState(1)
   const [id, setId] = useState(null)
   const [edit, setEdit] = useState(false)
   const [q, setQ] = useState('')
 
-  const { getEmployees, postEmployee, updateEmployee, deleteEmployee } =
-    useEmployeesHook({
-      page,
-      q,
-    })
-  const { getDepartments } = useDepartmentsHook({
+  const { getLeaves, postLeave, updateLeave, deleteLeave } = useLeavesHook({
     page,
     q,
-    limit: 10000000,
   })
-  const { getPositions } = usePositionsHook({
+  const { getEmployees } = useEmployeesHook({
     page,
     q,
     limit: 10000000,
@@ -50,12 +40,13 @@ const Employees = () => {
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: {},
+    defaultValues: {
+      auth: true,
+    },
   })
 
-  const { data, isLoading, isError, error, refetch } = getEmployees
-  const { data: departmentData } = getDepartments
-  const { data: positionData } = getPositions
+  const { data, isLoading, isError, error, refetch } = getLeaves
+  const { data: employeeData } = getEmployees
 
   const {
     isLoading: isLoadingUpdate,
@@ -63,7 +54,7 @@ const Employees = () => {
     error: errorUpdate,
     isSuccess: isSuccessUpdate,
     mutateAsync: mutateAsyncUpdate,
-  } = updateEmployee
+  } = updateLeave
 
   const {
     isLoading: isLoadingDelete,
@@ -71,7 +62,7 @@ const Employees = () => {
     error: errorDelete,
     isSuccess: isSuccessDelete,
     mutateAsync: mutateAsyncDelete,
-  } = deleteEmployee
+  } = deleteLeave
 
   const {
     isLoading: isLoadingPost,
@@ -79,7 +70,7 @@ const Employees = () => {
     error: errorPost,
     isSuccess: isSuccessPost,
     mutateAsync: mutateAsyncPost,
-  } = postEmployee
+  } = postLeave
 
   useEffect(() => {
     if (isSuccessPost || isSuccessUpdate) formCleanHandler()
@@ -105,40 +96,29 @@ const Employees = () => {
   // TableView
   const table = {
     header: [
-      'Employee ID',
+      'Emp. ID',
       'Name',
-      'Mobile',
-      'Department',
-      'Position',
-      'Status',
+      'Leave',
+      'Start Date',
+      'End Date',
+      'Description',
     ],
     body: [
-      'employeeId',
-      'name',
-      'mobile',
-      'department.name',
-      'position.name',
-      'status',
+      'employee.employeeId',
+      'employee.name',
+      'type',
+      'startDate',
+      'endDate',
+      'description',
     ],
     data: data,
-    hiredDate: 'hiredDate',
   }
 
   const editHandler = (item) => {
     setId(item._id)
 
     table.body.map((t) => setValue(t, item[t]))
-    setValue('department', item.department._id)
-    setValue('position', item.position._id)
-    setValue('nationality', item.nationality)
-    setValue('gender', item.gender)
-    setValue('contract', item.contract)
-    setValue('email', item.email)
-    setValue('hiredDate', moment(item.hiredDate).format('YYYY-MM-DD'))
-    setValue('dob', moment(item.dob).format('YYYY-MM-DD'))
-    setValue('bankName', item.bankName)
-    setValue('bankAccount', item.bankAccount)
-
+    setValue('employee', item.employee._id)
     setEdit(true)
   }
 
@@ -146,10 +126,10 @@ const Employees = () => {
     confirmAlert(Confirm(() => mutateAsyncDelete(id)))
   }
 
-  const name = 'Employees List'
-  const label = 'Employee'
-  const modal = 'employee'
-  const searchPlaceholder = 'Search by name or id'
+  const name = 'Leaves List'
+  const label = 'Leave'
+  const modal = 'leave'
+  const searchPlaceholder = 'Search by employee id'
 
   // FormView
   const formCleanHandler = () => {
@@ -166,128 +146,67 @@ const Employees = () => {
   }
 
   const form = [
-    inputText({
+    InputAutoCompleteSelect({
       register,
       errors,
-      label: 'Employee ID',
-      name: 'employeeId',
-      placeholder: 'Enter employee id',
-    }),
-    inputText({
-      register,
-      errors,
-      label: 'Name',
-      name: 'name',
-      placeholder: 'Enter name',
+      label: 'Employee',
+      name: 'employee',
+      placeholder: 'Enter employee',
+      data: employeeData?.data,
+      value: 'employeeId',
     }),
     staticInputSelect({
       register,
       errors,
-      label: 'Gender',
-      name: 'gender',
-      placeholder: 'Select gender',
-      data: [{ name: 'Male' }, { name: 'Female' }],
-    }),
-    inputNumber({
-      register,
-      errors,
-      label: 'Mobile',
-      name: 'mobile',
-      placeholder: 'Enter mobile number',
-    }),
-    staticInputSelect({
-      register,
-      errors,
-      label: 'Contract',
-      name: 'contract',
-      placeholder: 'Select contract',
-      data: [{ name: 'Permanent' }, { name: 'Temporary' }],
-    }),
-    inputEmail({
-      register,
-      errors,
-      label: 'Email',
-      name: 'email',
-      placeholder: 'Enter email address',
-    }),
-    inputDate({
-      register,
-      errors,
-      label: 'Hired Date',
-      name: 'hiredDate',
-      placeholder: 'Enter hired date',
-    }),
-    staticInputSelect({
-      register,
-      errors,
-      label: 'Nationality',
-      name: 'nationality',
-      placeholder: 'Select nationality',
+      label: 'Leave Type',
+      name: 'type',
+      placeholder: 'Select leave type',
       data: [
-        { name: 'Somali' },
-        { name: 'Egyptian' },
-        { name: 'Turkish' },
-        { name: 'Kazakh' },
-        { name: 'Ukrainian' },
-        { name: 'Russian' },
-        { name: 'Syrian' },
+        { name: 'Sick Leave' },
+        { name: 'Casual leave' },
+        { name: 'Public holiday' },
+        { name: 'Religious holidays' },
+        { name: 'Maternity leave' },
+        { name: 'Paternity leave' },
+        { name: 'Bereavement leave' },
+        { name: 'Compensatory leave' },
+        { name: 'Sabbatical leave' },
+        { name: 'Unpaid Leave' },
+        { name: 'Annual Leave' },
       ],
     }),
     inputDate({
       register,
       errors,
-      label: 'Date Of Birth',
-      name: 'dob',
-      placeholder: 'Enter date of birth',
+      label: 'Start Date',
+      name: 'startDate',
+      placeholder: 'Enter start date',
     }),
-    dynamicInputSelect({
+    inputDate({
       register,
       errors,
-      label: 'Department',
-      name: 'department',
-      placeholder: 'Select department',
-      data: departmentData?.data,
-      value: 'name',
+      label: 'End Date',
+      name: 'endDate',
+      placeholder: 'Enter end date',
     }),
-    dynamicInputSelect({
+    inputTextArea({
       register,
       errors,
-      label: 'Position',
-      name: 'position',
-      placeholder: 'Select position',
-      data: positionData?.data,
-      value: 'name',
-    }),
-    staticInputSelect({
-      register,
-      errors,
-      label: 'Bank Name',
-      name: 'bankName',
-      placeholder: 'Select bank name',
-      data: [
-        { name: 'Salaam Bank' },
-        { name: 'IBS Bank' },
-        { name: 'Premier Bank' },
-      ],
-    }),
-    inputText({
-      register,
-      errors,
-      label: 'Bank Account Number',
-      name: 'bankAccount',
-      placeholder: 'Enter bank account number',
+      label: 'Description',
+      name: 'description',
+      placeholder: 'Enter description',
     }),
   ]
 
-  const row = true
+  const row = false
   const column = 'col-md-6 col-12'
-  const modalSize = 'modal-lg'
+  const modalSize = 'modal-md'
 
   return (
     <>
       <Head>
-        <title>Employees</title>
-        <meta property='og:title' content='Employees' key='title' />
+        <title>Leaves</title>
+        <meta property='og:title' content='Leaves' key='title' />
       </Head>
 
       {isSuccessDelete && (
@@ -354,6 +273,6 @@ const Employees = () => {
   )
 }
 
-export default dynamic(() => Promise.resolve(withAuth(Employees)), {
+export default dynamic(() => Promise.resolve(withAuth(Leaves)), {
   ssr: false,
 })

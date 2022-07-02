@@ -12,17 +12,24 @@ handler.put(async (req, res) => {
   await db()
   try {
     const { id } = req.query
-    const { endDate, startDate } = req.body
+    const { endDate, startDate, employee, type, description } = req.body
 
-    const object = await schemaName.findById(id)
+    let object = await schemaName.findById(id)
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
     if (endDate < startDate)
-      return res.status(400).send('End date must be after start date')
+      return res
+        .status(400)
+        .json({ error: 'End date must be after start date' })
 
-    object = req.body
+    object.endDate = endDate
+    object.startDate = startDate
+    object.employee = employee
+    object.description = description
+    object.type = type
     object.updatedBy = req.user.id
+
     await object.save()
     res.status(200).json({ message: `${schemaNameString} updated` })
   } catch (error) {

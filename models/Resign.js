@@ -11,6 +11,7 @@ const resignScheme = mongoose.Schema(
     },
     type: { type: String, required: true },
     reason: { type: String, required: true },
+    date: { type: Date, required: true },
 
     // default properties
     createdBy: {
