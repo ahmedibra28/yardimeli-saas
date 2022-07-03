@@ -1,7 +1,7 @@
 import nc from 'next-connect'
 import db from '../../../../../config/db'
 import History from '../../../../../models/pregnancy-care/History'
-import Patient from '../../../../../models/Patient'
+import Patient from '../../../../../models/pregnancy-care/Patient'
 import { isAuth } from '../../../../../utils/auth'
 
 const schemaName = History

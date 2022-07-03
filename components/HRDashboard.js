@@ -20,7 +20,7 @@ const HRDashboard = () => {
       ) : isError ? (
         <Message variant='danger'>{error}</Message>
       ) : (
-        <div className='row  bg-light p-3 mt-2'>
+        <div className='row gy-3 bg-light p-3 mt-2'>
           <div className='col-lg-2 col-md-4 col-sm-4 col-6 mx-auto'>
             <div className='card border-0 shadow'>
               <div className='card-body text-center fw-bold'>

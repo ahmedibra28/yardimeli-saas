@@ -2,7 +2,7 @@ import moment from 'moment'
 import nc from 'next-connect'
 import db from '../../../../../../config/db'
 import Investigation from '../../../../../../models/pregnancy-care/Investigation'
-import Patient from '../../../../../../models/Patient'
+import Patient from '../../../../../../models/pregnancy-care/Patient'
 import { isAuth } from '../../../../../../utils/auth'
 
 const schemaName = Investigation

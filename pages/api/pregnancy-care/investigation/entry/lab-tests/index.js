@@ -1,6 +1,6 @@
 import nc from 'next-connect'
 import db from '../../../../../../config/db'
-import Investigation from '../../../../../../models/Investigation'
+import Investigation from '../../../../../../models/pregnancy-care/Investigation'
 import Patient from '../../../../../../models/pregnancy-care/Patient'
 import { isAuth } from '../../../../../../utils/auth'
 
