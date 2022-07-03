@@ -1,7 +1,7 @@
 import dynamicAPI from './dynamicAPI'
 import { useQuery, useMutation, useQueryClient } from 'react-query'
 
-const url = '/api/personnel/departments'
+const url = '/api/human-resource/personnel/departments'
 
 const queryKey = 'departments'
 

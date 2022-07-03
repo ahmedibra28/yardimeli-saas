@@ -48,14 +48,14 @@ const ResourcesTableView = (props) => {
         {table?.data?.data?.map((item, index) => (
           <div key={index} className='col-lg-3 col-md-4 col-6'>
             <div className='card border-0 shadow bg-transparent'>
-              <Link href={`/personnel/resources/${item._id}`}>
+              <Link href={`resources/${item._id}`}>
                 <a>
                   <FaFolder className='display-1 text-warning card-img-top' />
                 </a>
               </Link>
 
               <div className='card-body text-center'>
-                <Link href={`/personnel/resources/${item._id}`}>
+                <Link href={`resources/${item._id}`}>
                   <a className='text-decoration-none text-muted'>
                     <h5 className='card-title'>{item?.employee?.employeeId}</h5>
                     <div className='card-text'>
