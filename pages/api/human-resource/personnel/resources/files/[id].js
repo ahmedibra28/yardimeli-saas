@@ -1,6 +1,6 @@
 import nc from 'next-connect'
 import db from '../../../../../../config/db'
-import Resource from '../../../../../../models/Resource'
+import Resource from '../../../../../../models/human-resource/Resource'
 import { isAuth } from '../../../../../../utils/auth'
 
 const schemaName = Resource

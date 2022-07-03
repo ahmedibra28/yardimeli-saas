@@ -4,9 +4,9 @@ import dynamic from 'next/dynamic'
 import withAuth from '../../../HOC/withAuth'
 import { confirmAlert } from 'react-confirm-alert'
 import { useForm } from 'react-hook-form'
-import useEmployeesHook from '../../../utils/api/employees'
-import useDepartmentsHook from '../../../utils/api/departments'
-import usePositionsHook from '../../../utils/api/positions'
+import useEmployeesHook from '../../../utils/api/human-resource/employees'
+import useDepartmentsHook from '../../../utils/api/human-resource/departments'
+import usePositionsHook from '../../../utils/api/human-resource/positions'
 import { Spinner, Pagination, Message, Confirm } from '../../../components'
 import {
   dynamicInputSelect,

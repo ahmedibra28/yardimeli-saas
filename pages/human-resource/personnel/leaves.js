@@ -4,8 +4,8 @@ import dynamic from 'next/dynamic'
 import withAuth from '../../../HOC/withAuth'
 import { confirmAlert } from 'react-confirm-alert'
 import { useForm } from 'react-hook-form'
-import useLeavesHook from '../../../utils/api/leaves'
-import useEmployeesHook from '../../../utils/api/employees'
+import useLeavesHook from '../../../utils/api/human-resource/leaves'
+import useEmployeesHook from '../../../utils/api/human-resource/employees'
 import { Spinner, Pagination, Message, Confirm } from '../../../components'
 import {
   InputAutoCompleteSelect,

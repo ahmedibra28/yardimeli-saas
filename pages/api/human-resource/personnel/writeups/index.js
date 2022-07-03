@@ -1,7 +1,7 @@
 import nc from 'next-connect'
 import db from '../../../../../config/db'
-import Employee from '../../../../../models/Employee'
-import WriteUp from '../../../../../models/WriteUp'
+import Employee from '../../../../../models/human-resource/Employee'
+import WriteUp from '../../../../../models/human-resource/WriteUp'
 import { isAuth } from '../../../../../utils/auth'
 import moment from 'moment'
 

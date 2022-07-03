@@ -1,6 +1,6 @@
 import nc from 'next-connect'
 import db from '../../../../../config/db'
-import WriteUp from '../../../../../models/WriteUp'
+import WriteUp from '../../../../../models/human-resource/WriteUp'
 import { isAuth } from '../../../../../utils/auth'
 
 const schemaName = WriteUp

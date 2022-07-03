@@ -668,6 +668,13 @@ const permissions = [
     name: 'Write Up',
     method: 'DELETE',
   },
+  {
+    description: 'Dashboard Report',
+    route: '/api/human-resource/report/dashboard',
+    auth: true,
+    name: 'Report',
+    method: 'GET',
+  },
 
   // Pregnancy care endpoints
   {

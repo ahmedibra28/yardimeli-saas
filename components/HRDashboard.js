@@ -1,4 +1,4 @@
-import useReportsHook from '../utils/api/report'
+import useReportsHook from '../utils/api/human-resource/report'
 import { Spinner, Message } from '.'
 import {
   FaMicroscope,

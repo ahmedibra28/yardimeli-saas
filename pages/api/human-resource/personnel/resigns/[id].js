@@ -1,7 +1,7 @@
 import nc from 'next-connect'
 import db from '../../../../../config/db'
-import Resign from '../../../../../models/Resign'
-import Employee from '../../../../../models/Employee'
+import Resign from '../../../../../models/human-resource/Resign'
+import Employee from '../../../../../models/human-resource/Employee'
 import { isAuth } from '../../../../../utils/auth'
 
 const schemaName = Resign

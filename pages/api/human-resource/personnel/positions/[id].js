@@ -1,6 +1,6 @@
 import nc from 'next-connect'
 import db from '../../../../../config/db'
-import Position from '../../../../../models/Position'
+import Position from '../../../../../models/human-resource/Position'
 import { isAuth } from '../../../../../utils/auth'
 
 const schemaName = Position

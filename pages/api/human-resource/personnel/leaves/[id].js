@@ -1,6 +1,6 @@
 import nc from 'next-connect'
 import db from '../../../../../config/db'
-import Leave from '../../../../../models/Leave'
+import Leave from '../../../../../models/human-resource/Leave'
 import { isAuth } from '../../../../../utils/auth'
 
 const schemaName = Leave

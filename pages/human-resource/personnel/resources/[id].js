@@ -2,7 +2,7 @@ import Head from 'next/head'
 import dynamic from 'next/dynamic'
 import withAuth from '../../../../HOC/withAuth'
 import { confirmAlert } from 'react-confirm-alert'
-import useResourcesHook from '../../../../utils/api/resources'
+import useResourcesHook from '../../../../utils/api/human-resource/resources'
 import { Spinner, Message, Confirm } from '../../../../components'
 import { useRouter } from 'next/router'
 import {

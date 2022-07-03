@@ -1,6 +1,6 @@
 import nc from 'next-connect'
 import db from '../../../../../config/db'
-import Employee from '../../../../../models/Employee'
+import Employee from '../../../../../models/human-resource/Employee'
 import { isAuth } from '../../../../../utils/auth'
 
 const schemaName = Employee
