@@ -6,7 +6,7 @@ const url = '/api/personnel/resources'
 const queryKey = 'resources'
 
 export default function useResourcesHook(props) {
-  const { page = 1, q = '', limit = 25 } = props
+  const { page = 1, id, q = '', limit = 25 } = props
   const queryClient = useQueryClient()
 
   const getResources = useQuery(
@@ -14,6 +14,12 @@ export default function useResourcesHook(props) {
     async () =>
       await dynamicAPI('get', `${url}?page=${page}&q=${q}&limit=${limit}`, {}),
     { retry: 0 }
+  )
+
+  const getResourceDetails = useQuery(
+    `resources details`,
+    async () => await dynamicAPI('get', `${url}/${id}`, {}),
+    { retry: 0, enabled: !!id }
   )
 
   const updateResource = useMutation(
@@ -32,6 +38,14 @@ export default function useResourcesHook(props) {
     }
   )
 
+  const deleteResourceFile = useMutation(
+    async (obj) => await dynamicAPI('put', `${url}/files/${obj._id}`, { obj }),
+    {
+      retry: 0,
+      onSuccess: () => queryClient.invalidateQueries([`resources details`]),
+    }
+  )
+
   const postResource = useMutation(
     async (obj) => await dynamicAPI('post', url, obj),
     {
@@ -45,5 +59,7 @@ export default function useResourcesHook(props) {
     updateResource,
     deleteResource,
     postResource,
+    deleteResourceFile,
+    getResourceDetails,
   }
 }

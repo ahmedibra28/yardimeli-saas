@@ -9,12 +9,7 @@ const resourceScheme = mongoose.Schema(
       ref: Employee,
       required: true,
     },
-    description: { type: String, required: true },
-    files: [
-      {
-        file: { type: String, required: true },
-      },
-    ],
+    files: [],
 
     // default properties
     createdBy: {

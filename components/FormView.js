@@ -14,6 +14,7 @@ const FormView = ({
   column,
   row,
   modalSize,
+  isLoadingUpload,
 }) => {
   return (
     <div
@@ -65,9 +66,9 @@ const FormView = ({
                 <button
                   type='submit'
                   className='btn btn-primary '
-                  disabled={isLoadingPost || isLoadingUpdate}
+                  disabled={isLoadingPost || isLoadingUpdate || isLoadingUpload}
                 >
-                  {isLoadingPost || isLoadingUpdate ? (
+                  {isLoadingPost || isLoadingUpdate || isLoadingUpload ? (
                     <span className='spinner-border spinner-border-sm' />
                   ) : (
                     'Submit'

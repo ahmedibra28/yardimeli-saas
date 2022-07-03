@@ -39,4 +39,5 @@ yarn-error.log*
 /public/uploads/*.pdf
 /public/uploads/*.docx
 /public/uploads/*.doc
+/public/uploads/*.xlsx
 

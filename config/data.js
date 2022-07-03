@@ -153,6 +153,13 @@ const clientPermissions = [
     description: 'Resource page',
   },
   {
+    name: 'Resource',
+    path: '/personnel/resources/[id]',
+    menu: 'hidden',
+    auth: true,
+    description: 'Resource details page',
+  },
+  {
     name: 'Write Up',
     path: '/personnel/writeups',
     menu: 'personnel',
@@ -611,6 +618,13 @@ const permissions = [
     method: 'GET',
   },
   {
+    description: 'Get Resource Details',
+    route: '/api/personnel/resources/:id',
+    auth: true,
+    name: 'Resource',
+    method: 'GET',
+  },
+  {
     description: 'Create Resource',
     route: '/api/personnel/resources',
     auth: true,
@@ -630,6 +644,13 @@ const permissions = [
     auth: true,
     name: 'Resource',
     method: 'DELETE',
+  },
+  {
+    description: 'Delete Resource file',
+    route: '/api/personnel/resources/files/:id',
+    auth: true,
+    name: 'Resource',
+    method: 'PUT',
   },
 
   // Write Up API Endpoints
