@@ -128,8 +128,8 @@ const Employees = () => {
     setId(item._id)
 
     table.body.map((t) => setValue(t, item[t]))
-    setValue('department', item.department._id)
-    setValue('position', item.position._id)
+    setValue('department', item.department?._id)
+    setValue('position', item.position?._id)
     setValue('nationality', item.nationality)
     setValue('gender', item.gender)
     setValue('contract', item.contract)
@@ -209,6 +209,7 @@ const Employees = () => {
       label: 'Email',
       name: 'email',
       placeholder: 'Enter email address',
+      isRequired: false,
     }),
     inputDate({
       register,
@@ -269,6 +270,7 @@ const Employees = () => {
         { name: 'IBS Bank' },
         { name: 'Premier Bank' },
       ],
+      isRequired: false,
     }),
     inputText({
       register,
@@ -276,6 +278,7 @@ const Employees = () => {
       label: 'Bank Account Number',
       name: 'bankAccount',
       placeholder: 'Enter bank account number',
+      isRequired: false,
     }),
   ]
 

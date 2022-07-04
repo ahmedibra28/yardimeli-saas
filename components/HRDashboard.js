@@ -84,34 +84,39 @@ const HRDashboard = () => {
           <div className='col-12  mt-5'>
             <hr />
             <h3 className='text-center'>
-              On Leave Employees <sup>[{data?.totalOnLeave}]</sup>{' '}
+              On Leave Employees <sup>[{data?.totalOnLeave}]</sup>
             </h3>
-            <table className='table table-sm table-border'>
-              <thead className='border-0'>
-                <tr>
-                  <th>Emp. ID</th>
-                  <th>Name</th>
-                  <th>Department</th>
-                  <th>Leave Type</th>
-                  <th>Start Date</th>
-                  <th>End Date</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data?.leaves?.map((leave) => (
-                  <tr key={leave._id}>
-                    <td>{leave?.employee?.employeeId}</td>
-                    <td>{leave?.employee?.name}</td>
-                    <td>{leave?.employee?.department?.name}</td>
-                    <td>{leave?.type}</td>
-                    <td>{leave?.startDate}</td>
-                    <td>{leave?.endDate}</td>
-                    <td>{leave?.description}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+
+            {data?.leaves?.map((leave) => (
+              <div key={leave._id} className='card border-0 shadow my-3'>
+                <div className='card-body'>
+                  <div className='d-flex justify-content-between'>
+                    <div>
+                      <span className='fw-bold'>Emp. ID: </span>
+                      {leave?.employee?.employeeId}
+                      <br />
+                      <span className='fw-bold'>Emp. Name: </span>
+                      {leave?.employee?.name}
+                      <br />
+                      <span className='fw-bold'>Department: </span>
+                      {leave?.employee?.department?.name}
+                    </div>
+                    <div>
+                      <span className='fw-bold'>Start Date: </span>
+                      {leave?.startDate}
+                      <br />
+                      <span className='fw-bold'>End Date: </span>
+                      {leave?.endDate}
+                      <br />
+                    </div>
+                  </div>
+                  <p className='mt-3'>
+                    <span className='fw-bold'>Description: </span> <br />
+                    {leave?.description}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       )}

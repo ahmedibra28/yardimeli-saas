@@ -9,6 +9,16 @@ import Position from '../../../../models/human-resource/Position'
 import moment from 'moment'
 import { isAuth } from '../../../../utils/auth'
 
+const dateFormat = (data) => {
+  return data.map((d) => {
+    return {
+      ...d,
+      startDate: moment(d.startDate).format('YYYY-MM-DD'),
+      endDate: moment(d.endDate).format('YYYY-MM-DD'),
+    }
+  })
+}
+
 const handler = nc()
 handler.use(isAuth)
 handler.get(async (req, res) => {
@@ -19,7 +29,7 @@ handler.get(async (req, res) => {
     const writeups = await WriteUp.find({}).lean()
     const departments = await Department.find({}).lean()
     const positions = await Position.find({}).lean()
-    const leaves = await Leave.find({})
+    let leaves = await Leave.find({})
       .lean()
       .populate({
         path: 'employee',
@@ -27,6 +37,9 @@ handler.get(async (req, res) => {
           path: 'department',
         },
       })
+      .sort({ startDate: -1 })
+
+    leaves = dateFormat(leaves)
 
     const onLeave = leaves.filter(
       (leave) =>

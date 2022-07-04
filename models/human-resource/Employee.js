@@ -10,8 +10,8 @@ const employeeScheme = mongoose.Schema(
     gender: { type: String, required: true },
     mobile: { type: Number, required: true },
     contract: { type: String, required: true },
-    email: { type: String, default: new Date('01/01/1970') },
-    hiredDate: { type: Date, required: true },
+    email: { type: String, default: 'employee@mail.com' },
+    hiredDate: { type: Date, default: new Date('01/01/1970') },
     nationality: { type: String, default: 'Somali' },
     dob: { type: Date, required: true, default: new Date('01/01/1970') },
     position: {

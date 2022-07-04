@@ -78,14 +78,14 @@ export const inputNumber = (args) => {
 }
 
 export const inputEmail = (args) => {
-  const { register, placeholder, errors, label, name } = args
+  const { register, placeholder, errors, label, name, isRequired = true } = args
 
   return (
     <div className='mb-3'>
       <label htmlFor={name}>{label}</label>
       <input
         {...register(name, {
-          required: `${label} is required`,
+          required: isRequired ? `${label} is required` : null,
           pattern: {
             value: /\S+@\S+\.+\S+/,
             message: 'Entered value does not match email format',

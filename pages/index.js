@@ -11,16 +11,11 @@ const Home = () => {
   const components = [
     {
       _id: 1,
-      name: 'SUPER_ADMIN',
-      image: '/super_admin.png',
-    },
-    {
-      _id: 2,
       name: 'HUMAN_RESOURCE',
       image: '/hr.png',
     },
     {
-      _id: 3,
+      _id: 2,
       name: 'PREGNANCY_CARE',
       image: '/pregnancy.png',
     },
@@ -39,7 +34,7 @@ const Home = () => {
                   src={component.image}
                   alt={component.image}
                 />
-                <hr />
+
                 <div className='card-body text-center'>
                   <button
                     onClick={() => setUser(component.name)}
@@ -53,8 +48,6 @@ const Home = () => {
           ))}
         </div>
       )}
-
-      <hr />
 
       {user === 'PREGNANCY_CARE' && <PDashboard />}
       {user === 'HUMAN_RESOURCE' && <HRDashboard />}
