@@ -6,7 +6,7 @@ import { confirmAlert } from 'react-confirm-alert'
 import { useForm } from 'react-hook-form'
 import useResourcesHook from '../../../../utils/api/human-resource/resources'
 import useEmployeesHook from '../../../../utils/api/human-resource/employees'
-import useUploadHook from '../../../../utils/api/human-resource/upload'
+import useUploadHook from '../../../../utils/api/upload'
 import { Spinner, Pagination, Message, Confirm } from '../../../../components'
 import {
   InputAutoCompleteSelect,

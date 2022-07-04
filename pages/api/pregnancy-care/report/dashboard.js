@@ -17,7 +17,9 @@ handler.get(async (req, res) => {
 
     const data = {
       patients: patients.length,
-      dropoutPatients: patients.filter((patient) => patient.isActive)?.length,
+      dropoutPatients:
+        Number(patients.length) -
+        Number(patients.filter((patient) => patient.isActive)?.length),
       birthMothers: 0,
       normalDelivery: 0,
       cesareanDelivery: 0,

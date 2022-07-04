@@ -140,10 +140,11 @@ const Roles = () => {
     edit
       ? mutateAsyncUpdate({
           _id: id,
-          name: data.name,
-          method: data.method,
-          route: data.route,
           auth: data.auth,
+          clientPermission: data.clientPermission,
+          permission: data.permission,
+          name: data.name,
+          type: data.type,
           description: data.description,
         })
       : mutateAsyncPost(data)
