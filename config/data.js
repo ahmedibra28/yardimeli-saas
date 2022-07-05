@@ -166,6 +166,13 @@ const clientPermissions = [
     auth: true,
     description: 'Write Up page',
   },
+  {
+    name: 'Employee By Department',
+    path: '/human-resource/report/employee-by-departments',
+    menu: 'reports',
+    auth: true,
+    description: 'Employee By Department page',
+  },
 
   // pregnancy care
   {
@@ -674,6 +681,13 @@ const permissions = [
     auth: true,
     name: 'Report',
     method: 'GET',
+  },
+  {
+    description: 'Employee By Department Report',
+    route: '/api/human-resource/report/employee-by-departments',
+    auth: true,
+    name: 'Report',
+    method: 'POST',
   },
 
   // Pregnancy care endpoints

@@ -3,7 +3,7 @@ import { useQuery, useMutation, useQueryClient } from 'react-query'
 
 const url = '/api/human-resource/personnel/employees'
 
-const queryKey = 'employees'
+const queryKey = 'employees-key'
 
 export default function useEmployeesHook(props) {
   const { page = 1, q = '', limit = 25 } = props

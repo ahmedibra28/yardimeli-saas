@@ -72,7 +72,7 @@ const TableView = (props) => {
         </thead>
 
         <tbody>
-          {table?.data?.data.map((item) => {
+          {table?.data?.data?.map((item) => {
             return (
               <tr key={item._id}>
                 {table.image && (
