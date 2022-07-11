@@ -78,6 +78,7 @@ const Employees = () => {
                   onChange={(e) => setQ(e.target.value)}
                   value={q}
                 >
+                  <option value=''>Choose Department</option>
                   {departmentData?.data?.map((dep) => (
                     <option key={dep._id} value={dep._id}>
                       {dep.name}

@@ -16,8 +16,16 @@ export default function useReportsHook() {
     { retry: 0 }
   )
 
+  const postInvestigation = useMutation(
+    async (obj) => await dynamicAPI('post', `${url}/investigations`, obj),
+    {
+      retry: 0,
+    }
+  )
+
   return {
     postPatientRecord,
     getDashboard,
+    postInvestigation,
   }
 }

@@ -253,6 +253,13 @@ const clientPermissions = [
     auth: true,
     description: 'Patient Record Report page',
   },
+  {
+    name: 'Investigation Report',
+    path: '/pregnancy-care/report/investigations',
+    menu: 'reports',
+    auth: true,
+    description: 'Investigation Report page',
+  },
 ]
 
 const permissions = [
@@ -919,6 +926,13 @@ const permissions = [
     route: '/api/pregnancy-care/report/patient-records',
     auth: true,
     name: 'Patient Records Report',
+    method: 'POST',
+  },
+  {
+    description: 'Investigations Report',
+    route: '/api/pregnancy-care/report/investigations',
+    auth: true,
+    name: 'Investigations Report',
     method: 'POST',
   },
 ]
