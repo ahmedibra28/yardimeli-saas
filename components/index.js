@@ -22,6 +22,9 @@ import ViewLabTests from './lab-tests/ViewLabTests'
 import FormHistories from './histories/FormHistories'
 import ViewHistories from './histories/ViewHistories'
 
+import FormDeliveries from './deliveries/FormDeliveries'
+import ViewDeliveries from './deliveries/ViewDeliveries'
+
 import FormInvestigations from './investigations/FormInvestigations'
 import ViewInvestigations from './investigations/ViewInvestigations'
 import InvestigationTemplate from './investigations/InvestigationTemplate'
@@ -59,6 +62,8 @@ export {
   ViewLabTests,
   FormHistories,
   ViewHistories,
+  FormDeliveries,
+  ViewDeliveries,
   FormInvestigations,
   ViewInvestigations,
   InvestigationTemplate,

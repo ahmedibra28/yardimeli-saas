@@ -247,6 +247,13 @@ const clientPermissions = [
     description: 'Follow up page',
   },
   {
+    name: 'Delivery',
+    path: '/pregnancy-care/delivery',
+    menu: 'normal',
+    auth: true,
+    description: 'Delivery page',
+  },
+  {
     name: 'Patient Record Report',
     path: '/pregnancy-care/report/patient-records',
     menu: 'reports',
@@ -921,6 +928,36 @@ const permissions = [
     name: 'Follow Up',
     method: 'GET',
   },
+
+  {
+    description: 'Get Deliveries',
+    route: '/api/pregnancy-care/deliveries',
+    auth: true,
+    name: 'Delivery',
+    method: 'GET',
+  },
+  {
+    description: 'Create Delivery',
+    route: '/api/pregnancy-care/deliveries',
+    auth: true,
+    name: 'Delivery',
+    method: 'POST',
+  },
+  {
+    description: 'Update Delivery',
+    route: '/api/pregnancy-care/deliveries/:id',
+    auth: true,
+    name: 'Delivery',
+    method: 'PUT',
+  },
+  {
+    description: 'Delete Delivery',
+    route: '/api/pregnancy-care/deliveries/:id',
+    auth: true,
+    name: 'Delivery',
+    method: 'DELETE',
+  },
+
   {
     description: 'Patient Records Report',
     route: '/api/pregnancy-care/report/patient-records',

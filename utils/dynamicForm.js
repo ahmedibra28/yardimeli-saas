@@ -333,6 +333,25 @@ export const inputDate = (args) => {
   )
 }
 
+export const inputDateTime = (args) => {
+  const { register, placeholder, errors, name, label, isRequired = true } = args
+
+  return (
+    <div className='mb-3'>
+      <label htmlFor={name}>{label}</label>
+      <input
+        {...register(name, isRequired && { required: `${label} is required` })}
+        type='datetime-local'
+        placeholder={`${placeholder}`}
+        className='form-control'
+      />
+      {errors && errors[name] && (
+        <span className='text-danger'>{errors[name].message}</span>
+      )}
+    </div>
+  )
+}
+
 export const InputAutoCompleteSelect = (args) => {
   const {
     register,
@@ -347,7 +366,7 @@ export const InputAutoCompleteSelect = (args) => {
 
   return (
     <div className='mb-3'>
-      <label htmlFor='exampleDataList' className='form-label'>
+      <label htmlFor='exampleDataList' className='form-label mb-0'>
         {label}
       </label>
       <input

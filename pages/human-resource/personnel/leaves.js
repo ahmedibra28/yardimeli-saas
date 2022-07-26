@@ -173,6 +173,7 @@ const Leaves = () => {
         { name: 'Sabbatical leave' },
         { name: 'Unpaid Leave' },
         { name: 'Annual Leave' },
+        { name: 'Marriage Leave' },
       ],
     }),
     inputDate({

@@ -64,6 +64,11 @@ const FollowUps = () => {
     reset()
   }
 
+  useEffect(() => {
+    if (isSuccessPost) formCleanHandler()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSuccessPost])
+
   const submitHandler = (data) => {
     mutateAsyncPost(data)
   }
