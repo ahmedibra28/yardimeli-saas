@@ -4,6 +4,7 @@ import {
   inputNumber,
   staticInputSelect,
   InputAutoCompleteSelect,
+  inputDate,
 } from '../../utils/dynamicForm'
 
 const FormHistories = ({
@@ -295,6 +296,15 @@ const FormHistories = ({
                       placeholder: 'Diagnostics',
                       errors,
                       name: 'diagnostics',
+                    })}
+                  </div>
+                  <div className='col-md-6 col-12'>
+                    {inputDate({
+                      register,
+                      errors,
+                      label: 'Date',
+                      name: 'date',
+                      placeholder: 'Date',
                     })}
                   </div>
                 </div>

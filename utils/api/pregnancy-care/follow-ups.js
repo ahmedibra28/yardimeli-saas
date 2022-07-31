@@ -24,8 +24,26 @@ export default function useFollowUpsHook(props) {
     }
   )
 
+  const updateFollowUp = useMutation(
+    async (obj) => await dynamicAPI('put', `${url}/${obj._id}`, obj),
+    {
+      retry: 0,
+      onSuccess: () => queryClient.invalidateQueries([queryKey]),
+    }
+  )
+
+  const deleteFollowUp = useMutation(
+    async (obj) => await dynamicAPI('delete', `${url}/${obj._id}`, obj),
+    {
+      retry: 0,
+      onSuccess: () => queryClient.invalidateQueries([queryKey]),
+    }
+  )
+
   return {
     postFollowUp,
     getFollowUps,
+    updateFollowUp,
+    deleteFollowUp,
   }
 }

@@ -29,7 +29,7 @@ handler.get(async (req, res) => {
     query = query
       .skip(skip)
       .limit(pageSize)
-      .sort({ createdAt: -1 })
+      .sort({ date: -1 })
       .lean()
       .populate('patient', ['patientId', 'name'])
       .populate('createdBy', ['name'])
@@ -53,7 +53,7 @@ handler.get(async (req, res) => {
 handler.post(async (req, res) => {
   await db()
   try {
-    const { patient, description } = req.body
+    const { patient, date, description } = req.body
 
     const patients = await Patient.findById(patient)
 
@@ -62,6 +62,7 @@ handler.post(async (req, res) => {
     const followUp = await schemaName.create({
       patient: patients._id,
       description,
+      date,
       createdBy: req.user._id,
     })
 

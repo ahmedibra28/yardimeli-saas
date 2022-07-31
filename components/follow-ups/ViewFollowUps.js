@@ -1,8 +1,16 @@
 import { Search } from '..'
-import Image from 'next/image'
+import { FaPenAlt, FaTrash } from 'react-icons/fa'
 import moment from 'moment'
 
-const ViewFollowUps = ({ data, setQ, q, searchHandler }) => {
+const ViewFollowUps = ({
+  data,
+  editHandler,
+  deleteHandler,
+  isLoadingDelete,
+  setQ,
+  q,
+  searchHandler,
+}) => {
   return (
     <div className='table-responsive bg-light p-3 mt-2'>
       <div className='d-flex align-items-center flex-column mb-2'>
@@ -34,6 +42,7 @@ const ViewFollowUps = ({ data, setQ, q, searchHandler }) => {
             <th>Description</th>
             <th>Created At</th>
             <th>Created By</th>
+            <th>Action</th>
           </tr>
         </thead>
 
@@ -44,8 +53,34 @@ const ViewFollowUps = ({ data, setQ, q, searchHandler }) => {
                 <td>{followUp.patient.patientId}</td>
                 <td>{followUp.patient.name}</td>
                 <td>{followUp.description}</td>
-                <td>{moment(followUp.createdAt).format('ll')}</td>
+                <td>{moment(followUp.date).format('ll')}</td>
                 <td>{followUp.createdBy && followUp.createdBy.name}</td>
+                <td>
+                  <div className='btn-group'>
+                    <button
+                      className='btn btn-primary btn-sm rounded-pill'
+                      onClick={() => editHandler(followUp)}
+                      data-bs-toggle='modal'
+                      data-bs-target='#followUpModal'
+                    >
+                      <FaPenAlt />
+                    </button>
+
+                    <button
+                      className='btn btn-danger btn-sm ms-1 rounded-pill'
+                      onClick={() => deleteHandler(followUp._id)}
+                      disabled={isLoadingDelete}
+                    >
+                      {isLoadingDelete ? (
+                        <span className='spinner-border spinner-border-sm' />
+                      ) : (
+                        <span>
+                          <FaTrash />
+                        </span>
+                      )}
+                    </button>
+                  </div>
+                </td>
               </tr>
             ))}
         </tbody>

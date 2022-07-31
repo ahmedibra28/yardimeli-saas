@@ -55,7 +55,7 @@ const ViewInvestigations = ({
                 </td>
                 <td>{investigation.patient && investigation.patient.name}</td>
                 <td>{investigation.investigationType}</td>
-                <td>{moment(investigation.createdAt).format('ll')}</td>
+                <td>{moment(investigation.date).format('ll')}</td>
                 <td>
                   {investigation.createdBy && investigation.createdBy.name}
                 </td>

@@ -50,7 +50,7 @@ const ViewLabTests = ({
               <tr key={labTest._id}>
                 <td>{labTest.name}</td>
                 <td>{labTest.reference}</td>
-                <td>{moment(labTest.createdAt).format('ll')}</td>
+                <td>{moment(labTest.date).format('ll')}</td>
                 <td>
                   {labTest.isActive ? (
                     <FaCheckCircle className='text-success' />

@@ -44,7 +44,7 @@ const ViewEntryVaccinations = ({
               <tr key={vaccination._id}>
                 <td>{vaccination.patient && vaccination.patient.patientId}</td>
                 <td>{vaccination.patient && vaccination.patient.name}</td>
-                <td>{moment(vaccination.createdAt).format('ll')}</td>
+                <td>{moment(vaccination.date).format('ll')}</td>
                 <td>{vaccination.createdBy && vaccination.createdBy.name}</td>
                 <td>
                   {vaccination.status === 'pending' ? (

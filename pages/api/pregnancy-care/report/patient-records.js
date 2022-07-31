@@ -34,7 +34,7 @@ handler.post(async (req, res) => {
     const patientRecords = await Investigation.find({
       patient: patient._id,
       status: 'completed',
-      createdAt: {
+      date: {
         $gte: start,
         $lte: end,
       },
@@ -46,12 +46,12 @@ handler.post(async (req, res) => {
       .populate('vaccinations.vaccination')
       .populate('createdBy', ['name'])
       .lean()
-      .sort({ createdAt: -1 })
+      .sort({ date: -1 })
 
     // get patient prescriptions between startDate and endDate
     //  const patientPrescriptions = await Prescription.find({
     //   patient: patient._id,
-    //   createdAt: {
+    //   date: {
     //     $gte: start,
     //     $lte: end,
     //   },
@@ -60,7 +60,7 @@ handler.post(async (req, res) => {
     //   .populate('createdBy', ['name'])
     //   .populate('patient', ['name', 'patientId'])
     //   .lean()
-    //   .sort({ createdAt: -1 })
+    //   .sort({ date: -1 })
     const patientPrescriptions = []
 
     res.status(201).json({ patientRecords, patientPrescriptions })

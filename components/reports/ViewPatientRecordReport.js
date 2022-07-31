@@ -146,7 +146,7 @@ const ViewPatientRecordReport = ({
                           </div>
                           <div className='col text-end'>
                             <strong>INVESTIGATION DATE: </strong> <br />{' '}
-                            {moment(record.createdAt).format('MMM Do YY')}
+                            {moment(record.date).format('MMM Do YY')}
                           </div>
                         </div>
 
@@ -208,7 +208,7 @@ const ViewPatientRecordReport = ({
                           </div>
                           <div className='col text-end'>
                             <strong>INVESTIGATION DATE: </strong> <br />{' '}
-                            {moment(record.createdAt).format('MMM Do YY')}
+                            {moment(record.date).format('MMM Do YY')}
                           </div>
                         </div>
 
@@ -274,7 +274,7 @@ const ViewPatientRecordReport = ({
                           </div>
                           <div className='col text-end'>
                             <strong>INVESTIGATION DATE: </strong> <br />{' '}
-                            {moment(record.createdAt).format('MMM Do YY')}
+                            {moment(record.date).format('MMM Do YY')}
                           </div>
                         </div>
 
@@ -392,7 +392,7 @@ const ViewPatientRecordReport = ({
                     </div>
                     <div className='col text-end'>
                       <strong>PRESCRIBED DATE: </strong> <br />{' '}
-                      {moment(record.createdAt).format('MMM Do YY')}
+                      {moment(record.date).format('MMM Do YY')}
                     </div>
                   </div>
 

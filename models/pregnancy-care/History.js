@@ -32,6 +32,7 @@ const historyScheme = mongoose.Schema(
       ref: Patient,
       required: true,
     },
+    date: { type: Date, default: Date.now },
 
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,

@@ -29,7 +29,7 @@ handler.get(async (req, res) => {
     query = query
       .skip(skip)
       .limit(pageSize)
-      .sort({ createdAt: -1 })
+      .sort({ date: -1 })
       .lean()
       .populate('patient', ['patientId', 'name'])
       .populate('createdBy', ['name'])

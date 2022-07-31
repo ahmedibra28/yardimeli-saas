@@ -4,6 +4,7 @@ import withAuth from '../../HOC/withAuth'
 import { useForm } from 'react-hook-form'
 import useFollowUpsHook from '../../utils/api/pregnancy-care/follow-ups'
 import usePatientsHook from '../../utils/api/pregnancy-care/patients'
+import moment from 'moment'
 
 import {
   FormFollowUps,
@@ -16,18 +17,37 @@ import { useEffect, useState } from 'react'
 
 const FollowUps = () => {
   const [page, setPage] = useState(1)
+  const [id, setId] = useState(null)
+  const [edit, setEdit] = useState(false)
   const [q, setQ] = useState('')
 
-  const { postFollowUp, getFollowUps } = useFollowUpsHook({
-    page,
-    q,
-    limit: 25,
-  })
+  const { postFollowUp, getFollowUps, updateFollowUp, deleteFollowUp } =
+    useFollowUpsHook({
+      page,
+      q,
+      limit: 25,
+    })
   const { getPatients } = usePatientsHook({
     limit: 1000,
   })
 
   const { data, isLoading, isError, error, refetch } = getFollowUps
+
+  const {
+    isLoading: isLoadingUpdate,
+    isError: isErrorUpdate,
+    error: errorUpdate,
+    isSuccess: isSuccessUpdate,
+    mutateAsync: mutateAsyncUpdate,
+  } = updateFollowUp
+
+  const {
+    isLoading: isLoadingDelete,
+    isError: isErrorDelete,
+    error: errorDelete,
+    isSuccess: isSuccessDelete,
+    mutateAsync: mutateAsyncDelete,
+  } = deleteFollowUp
 
   useEffect(() => {
     refetch()
@@ -43,6 +63,7 @@ const FollowUps = () => {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -62,15 +83,35 @@ const FollowUps = () => {
 
   const formCleanHandler = () => {
     reset()
+    setEdit(false)
   }
 
   useEffect(() => {
-    if (isSuccessPost) formCleanHandler()
+    if (isSuccessPost || isSuccessUpdate) formCleanHandler()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSuccessPost])
+  }, [isSuccessPost, isSuccessUpdate])
+
+  const deleteHandler = (id) => {
+    confirmAlert(Confirm(() => mutateAsyncDelete(id)))
+  }
 
   const submitHandler = (data) => {
-    mutateAsyncPost(data)
+    edit
+      ? mutateAsyncUpdate({
+          _id: id,
+          date: data.date,
+          description: data.description,
+          patient: data.patient,
+        })
+      : mutateAsyncPost(data)
+  }
+
+  const editHandler = (followUp) => {
+    setId(followUp._id)
+    setEdit(true)
+    setValue('patient', followUp.patient?._id)
+    setValue('description', followUp.description)
+    setValue('date', moment(followUp?.date).format('YYYY-MM-DD'))
   }
 
   const searchHandler = (e) => {
@@ -93,13 +134,29 @@ const FollowUps = () => {
       )}
       {isErrorPost && <Message variant='danger'>{errorPost}</Message>}
 
+      {isSuccessUpdate && (
+        <Message variant='success'>
+          FollowUp has been updated successfully.
+        </Message>
+      )}
+      {isErrorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+
+      {isSuccessDelete && (
+        <Message variant='success'>
+          FollowUp has been deleted successfully.
+        </Message>
+      )}
+      {isErrorDelete && <Message variant='danger'>{errorDelete}</Message>}
+
       <div className='ms-auto text-end'>
         <Pagination data={data} setPage={setPage} />
       </div>
 
       <FormFollowUps
+        edit={edit}
         formCleanHandler={formCleanHandler}
         errors={errors}
+        isLoadingUpdate={isLoadingUpdate}
         isLoadingPost={isLoadingPost}
         register={register}
         handleSubmit={handleSubmit}
@@ -117,6 +174,9 @@ const FollowUps = () => {
           setQ={setQ}
           q={q}
           searchHandler={searchHandler}
+          editHandler={editHandler}
+          deleteHandler={deleteHandler}
+          isLoadingDelete={isLoadingDelete}
         />
       )}
     </>

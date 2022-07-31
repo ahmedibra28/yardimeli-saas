@@ -108,6 +108,7 @@ const Patients = () => {
           status: data.status,
           trimester: data.trimester,
           isActive: data.isActive,
+          date: data.date,
         })
       : mutateAsyncPost(data)
   }
@@ -123,6 +124,7 @@ const Patients = () => {
     setValue('status', patient.status)
     setValue('trimester', patient.trimester)
     setValue('isActive', patient.isActive)
+    setValue('date', moment(patient?.date).format('YYYY-MM-DD'))
   }
 
   return (

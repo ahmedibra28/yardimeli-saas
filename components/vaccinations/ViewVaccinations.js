@@ -48,7 +48,7 @@ const ViewVaccinations = ({
             data.data.map((vaccination) => (
               <tr key={vaccination._id}>
                 <td>{vaccination.name}</td>
-                <td>{moment(vaccination.createdAt).format('ll')}</td>
+                <td>{moment(vaccination.date).format('ll')}</td>
                 <td>
                   {vaccination.isActive ? (
                     <FaCheckCircle className='text-success' />

@@ -928,6 +928,20 @@ const permissions = [
     name: 'Follow Up',
     method: 'GET',
   },
+  {
+    description: 'Update Follow Up',
+    route: '/api/pregnancy-care/follow-up/:id',
+    auth: true,
+    name: 'Follow Up',
+    method: 'PUT',
+  },
+  {
+    description: 'Delete Follow Up',
+    route: '/api/pregnancy-care/follow-up/:id',
+    auth: true,
+    name: 'Follow Up',
+    method: 'DELETE',
+  },
 
   {
     description: 'Get Deliveries',

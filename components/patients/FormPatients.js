@@ -139,6 +139,15 @@ const FormPatients = ({
                       data: [{ name: 'Married' }, { name: 'Divorced' }],
                     })}
                   </div>
+                  <div className='col-md-6 col-12'>
+                    {inputDate({
+                      register,
+                      errors,
+                      label: 'Date',
+                      name: 'date',
+                      placeholder: 'Date',
+                    })}
+                  </div>
                 </div>
 
                 {inputCheckBox({

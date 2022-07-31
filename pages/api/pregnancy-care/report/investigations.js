@@ -28,7 +28,7 @@ handler.post(async (req, res) => {
         investigationType: investigationType.toLowerCase(),
         status: 'completed',
       })
-        .sort({ createdAt: -1 })
+        .sort({ date: -1 })
         .lean()
         .populate('patient', ['patientId', 'name'])
         .populate('createdBy', ['name'])

@@ -37,7 +37,7 @@ const ViewEntryLabTests = ({ data, editHandler, setQ, q, searchHandler }) => {
               <tr key={labTest._id}>
                 <td>{labTest.patient && labTest.patient.patientId}</td>
                 <td>{labTest.patient && labTest.patient.name}</td>
-                <td>{moment(labTest.createdAt).format('ll')}</td>
+                <td>{moment(labTest.date).format('ll')}</td>
                 <td>{labTest.createdBy && labTest.createdBy.name}</td>
                 <td>
                   {labTest.status === 'pending' ? (

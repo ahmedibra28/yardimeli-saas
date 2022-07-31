@@ -1,4 +1,8 @@
-import { InputAutoCompleteSelect, inputTextArea } from '../../utils/dynamicForm'
+import {
+  InputAutoCompleteSelect,
+  inputDate,
+  inputTextArea,
+} from '../../utils/dynamicForm'
 
 const FormFollowUps = ({
   formCleanHandler,
@@ -43,6 +47,13 @@ const FormFollowUps = ({
                 value: 'patientId',
                 placeholder: 'patient',
                 data: dataPatient && dataPatient.filter((p) => p.isActive),
+              })}
+              {inputDate({
+                register,
+                errors,
+                label: 'Date',
+                name: 'date',
+                placeholder: 'Date',
               })}
               {inputTextArea({
                 register,

@@ -37,6 +37,7 @@ handler.put(async (req, res) => {
       infantDeath,
       neonatalDeath,
       toddlerDeath,
+      date,
     } = req.body
 
     if (!patient) return res.status(400).json({ error: 'Patient is required' })
@@ -45,7 +46,7 @@ handler.put(async (req, res) => {
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
-    if (object.createdAt.toDateString() !== new Date().toDateString())
+    if (object.date.toDateString() !== new Date().toDateString())
       return res.status(400).json({
         error: `Patient history can only be updated ${new Date().toDateString()}`,
       })
@@ -75,6 +76,7 @@ handler.put(async (req, res) => {
     object.infantDeath = infantDeath
     object.neonatalDeath = neonatalDeath
     object.toddlerDeath = toddlerDeath
+    object.date = date
 
     await object.save()
     res.status(200).json({ message: `${schemaNameString} updated` })
@@ -91,7 +93,7 @@ handler.delete(async (req, res) => {
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
-    if (object.createdAt.toDateString() !== new Date().toDateString())
+    if (object.date.toDateString() !== new Date().toDateString())
       return res.status(400).json({
         error: `Patient history can only be deleted ${new Date().toDateString()}`,
       })

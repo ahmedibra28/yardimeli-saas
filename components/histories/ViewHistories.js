@@ -52,7 +52,7 @@ const ViewHistories = ({
                 <td>{history.patient && history.patient.patientId}</td>
                 <td>{history.patient && history.patient.name}</td>
                 <td>{history.createdBy && history.createdBy.name}</td>
-                <td>{moment(history.createdAt).format('ll')}</td>
+                <td>{moment(history.date).format('ll')}</td>
                 <td>{history.diagnostics}</td>
 
                 <td>

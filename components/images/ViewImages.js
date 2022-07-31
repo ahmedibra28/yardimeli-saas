@@ -48,7 +48,7 @@ const ViewImages = ({
             data.data.map((image) => (
               <tr key={image._id}>
                 <td>{image.name}</td>
-                <td>{moment(image.createdAt).format('ll')}</td>
+                <td>{moment(image.date).format('ll')}</td>
                 <td>
                   {image.isActive ? (
                     <FaCheckCircle className='text-success' />

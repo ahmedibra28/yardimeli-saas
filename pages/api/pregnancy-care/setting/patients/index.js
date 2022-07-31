@@ -23,7 +23,7 @@ handler.get(async (req, res) => {
 
     const pages = Math.ceil(total / pageSize)
 
-    query = query.skip(skip).limit(pageSize).sort({ createdAt: -1 }).lean()
+    query = query.skip(skip).limit(pageSize).sort({ date: -1 }).lean()
 
     const result = await query
 

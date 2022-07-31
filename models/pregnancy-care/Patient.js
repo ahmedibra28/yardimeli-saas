@@ -11,6 +11,7 @@ const patientScheme = mongoose.Schema(
     status: { type: String, required: true },
     trimester: { type: Number, required: true },
     isActive: { type: Boolean, default: true },
+    date: { type: Date, default: Date.now },
     createdBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: User,

@@ -189,7 +189,7 @@ const InvestigationTemplate = ({ investigations }) => {
               </div>
               <div className='col text-end'>
                 <strong>CREATED AT: </strong> <br />{' '}
-                {moment(investigations.createdAt).format('MMM Do YY')}
+                {moment(investigations.date).format('MMM Do YY')}
               </div>
             </div>
 

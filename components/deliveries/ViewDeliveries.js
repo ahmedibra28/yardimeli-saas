@@ -52,8 +52,8 @@ const ViewDeliveries = ({
                 <td>{delivery.patient && delivery.patient.patientId}</td>
                 <td>{delivery.patient && delivery.patient.name}</td>
                 <td>{delivery.createdBy && delivery.createdBy.name}</td>
-                <td>{moment(delivery.createdAt).format('ll')}</td>
-                <td>{moment(delivery?.postDelivery?.date).format('ll')}</td>
+                <td>{moment(delivery.preDelivery.date).format('ll')}</td>
+                <td>{moment(delivery?.postDelivery?.postDate).format('ll')}</td>
 
                 <td>
                   <div className='btn-group'>

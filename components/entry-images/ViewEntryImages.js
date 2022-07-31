@@ -37,7 +37,7 @@ const ViewEntryImages = ({ data, editHandler, setQ, q, searchHandler }) => {
               <tr key={image._id}>
                 <td>{image.patient && image.patient.patientId}</td>
                 <td>{image.patient && image.patient.name}</td>
-                <td>{moment(image.createdAt).format('ll')}</td>
+                <td>{moment(image.date).format('ll')}</td>
                 <td>{image.createdBy && image.createdBy.name}</td>
                 <td>
                   {image.status === 'pending' ? (

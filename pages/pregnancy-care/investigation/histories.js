@@ -6,6 +6,7 @@ import { confirmAlert } from 'react-confirm-alert'
 import { useForm } from 'react-hook-form'
 import useHistoriesHook from '../../../utils/api/pregnancy-care/histories'
 import usePatientsHook from '../../../utils/api/pregnancy-care/patients'
+import moment from 'moment'
 import {
   Spinner,
   ViewHistories,
@@ -130,6 +131,7 @@ const Histories = () => {
           infantDeath: data.infantDeath,
           neonatalDeath: data.neonatalDeath,
           toddlerDeath: data.toddlerDeath,
+          date: data.date,
         })
       : mutateAsyncPost(data)
   }
@@ -161,6 +163,7 @@ const Histories = () => {
     setValue('infantDeath', history.infantDeath)
     setValue('neonatalDeath', history.neonatalDeath)
     setValue('toddlerDeath', history.toddlerDeath)
+    setValue('date', moment(history?.date).format('YYYY-MM-DD'))
   }
 
   return (

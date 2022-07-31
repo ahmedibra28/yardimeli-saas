@@ -29,7 +29,7 @@ handler.get(async (req, res) => {
     query = query
       .skip(skip)
       .limit(pageSize)
-      .sort({ createdAt: -1 })
+      .sort({ date: -1 })
       .lean()
       .populate('patient', ['patientId', 'name'])
       .populate('createdBy', ['name'])
@@ -56,7 +56,7 @@ handler.get(async (req, res) => {
 handler.post(async (req, res) => {
   await db()
   try {
-    let { patient, images, labTests, vaccinations, investigationType } =
+    let { patient, images, labTests, vaccinations, investigationType, date } =
       req.body
 
     if (!patient) return res.status(400).json({ error: 'Patient is required' })
@@ -76,6 +76,7 @@ handler.post(async (req, res) => {
         : [],
       investigationType,
       status: 'pending',
+      date,
       patient,
       createdBy: req.user._id,
     })

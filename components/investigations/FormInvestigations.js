@@ -2,6 +2,7 @@ import { Spinner, Message } from '..'
 import {
   dynamicInputSelect,
   InputAutoCompleteSelect,
+  inputDate,
   inputMultipleCheckBox,
 } from '../../utils/dynamicForm'
 
@@ -54,7 +55,7 @@ const FormInvestigations = ({
             ) : (
               <form onSubmit={handleSubmit(submitHandler)}>
                 <div className='row'>
-                  <div className='col-12'>
+                  <div className='col-md-6 col-12'>
                     {InputAutoCompleteSelect({
                       register,
                       label: 'Patient',
@@ -64,6 +65,15 @@ const FormInvestigations = ({
                       value: 'patientId',
                       data:
                         dataPatient && dataPatient.filter((p) => p.isActive),
+                    })}
+                  </div>
+                  <div className='col-md-6 col-12'>
+                    {inputDate({
+                      register,
+                      errors,
+                      label: 'Date',
+                      name: 'date',
+                      placeholder: 'Date',
                     })}
                   </div>
                   <div className='col-12 text-center'>
