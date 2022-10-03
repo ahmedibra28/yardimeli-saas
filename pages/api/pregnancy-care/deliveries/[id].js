@@ -43,6 +43,16 @@ handler.put(async (req, res) => {
       postVitalSign,
       postPulse,
       postTemperature,
+
+      childPatientId,
+      doctor,
+      gestationalAge,
+      gender,
+      noOfBabies,
+      childStatus,
+      apgarScore,
+      weight,
+      breastSucking,
     } = req.body
 
     const preDelivery = {
@@ -75,6 +85,17 @@ handler.put(async (req, res) => {
       postPulse,
       postTemperature,
     }
+    const baby = {
+      childPatientId,
+      doctor,
+      gestationalAge,
+      gender,
+      noOfBabies,
+      childStatus,
+      apgarScore,
+      weight,
+      breastSucking,
+    }
 
     const object = await schemaName.findById(id)
     if (!object)
@@ -86,6 +107,7 @@ handler.put(async (req, res) => {
     object.patient = patient
     object.preDelivery = preDelivery
     object.postDelivery = postDelivery
+    object.baby = baby
     object.isActive = isActive
     object.updatedBy = req.user._id
 

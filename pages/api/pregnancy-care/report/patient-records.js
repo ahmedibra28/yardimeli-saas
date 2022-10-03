@@ -3,9 +3,9 @@ import nc from 'next-connect'
 import db from '../../../../config/db'
 import Investigation from '../../../../models/pregnancy-care/Investigation'
 import Patient from '../../../../models/pregnancy-care/Patient'
+// import Prescription from '../../../../models/pregnancy-care/Prescription'
+import Delivery from '../../../../models/pregnancy-care/Delivery'
 import { isAuth } from '../../../../utils/auth'
-
-const schemaName = Investigation
 
 const handler = nc()
 handler.use(isAuth)
@@ -63,7 +63,11 @@ handler.post(async (req, res) => {
     //   .sort({ date: -1 })
     const patientPrescriptions = []
 
-    res.status(201).json({ patientRecords, patientPrescriptions })
+    const deliveries = await Delivery.findOne({
+      patient: patient?._id,
+    }).populate('createdBy', ['name'])
+
+    res.status(201).json({ patientRecords, patientPrescriptions, deliveries })
   } catch (error) {
     res.status(500).json({ error: error.message })
   }

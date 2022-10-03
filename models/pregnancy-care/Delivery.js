@@ -47,6 +47,21 @@ const deliveryScheme = mongoose.Schema(
       postPulse: { type: String, required: true },
       postTemperature: { type: String, required: true },
     },
+    baby: {
+      childPatientId: { type: String, required: true },
+      doctor: { type: String, required: true },
+      gestationalAge: { type: String, required: true },
+      gender: { type: String, required: true },
+      noOfBabies: { type: String, required: true },
+      childStatus: {
+        type: String,
+        required: true,
+        enum: ['Alive', 'Death'],
+      },
+      apgarScore: { type: String, required: true },
+      weight: { type: String, required: true },
+      breastSucking: { type: Boolean, required: true },
+    },
 
     isActive: { type: Boolean, default: true },
     createdBy: {

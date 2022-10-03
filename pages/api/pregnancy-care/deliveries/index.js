@@ -83,6 +83,16 @@ handler.post(async (req, res) => {
       postVitalSign,
       postPulse,
       postTemperature,
+
+      childPatientId,
+      doctor,
+      gestationalAge,
+      gender,
+      noOfBabies,
+      childStatus,
+      apgarScore,
+      weight,
+      breastSucking,
     } = req.body
 
     const preDelivery = {
@@ -116,6 +126,18 @@ handler.post(async (req, res) => {
       postTemperature,
     }
 
+    const baby = {
+      childPatientId,
+      doctor,
+      gestationalAge,
+      gender,
+      noOfBabies,
+      childStatus,
+      apgarScore,
+      weight,
+      breastSucking,
+    }
+
     const patients = await Patient.findOne({ _id: patient, isActive: true })
     if (!patients) return res.status(404).json({ error: 'Patient not found' })
 
@@ -123,6 +145,7 @@ handler.post(async (req, res) => {
       patient,
       preDelivery,
       postDelivery,
+      baby,
       isActive,
       createdBy: req.user._id,
     })

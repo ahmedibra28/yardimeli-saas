@@ -100,15 +100,7 @@ const Patients = () => {
     edit
       ? mutateAsyncUpdate({
           _id: id,
-          patientId: data.patientId,
-          name: data.name,
-          dateOfBirth: data.dateOfBirth,
-          mobile: data.mobile,
-          district: data.district,
-          status: data.status,
-          trimester: data.trimester,
-          isActive: data.isActive,
-          date: data.date,
+          ...data,
         })
       : mutateAsyncPost(data)
   }
@@ -117,6 +109,8 @@ const Patients = () => {
     setId(patient._id)
     setEdit(true)
     setValue('patientId', patient.patientId)
+    setValue('childPatientId', patient?.childPatientId)
+    setValue('patientType', patient?.patientType)
     setValue('name', patient.name)
     setValue('dateOfBirth', moment(patient.dateOfBirth).format('YYYY-MM-DD'))
     setValue('mobile', patient.mobile)

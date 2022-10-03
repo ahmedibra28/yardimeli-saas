@@ -14,6 +14,8 @@ handler.put(async (req, res) => {
     const { id } = req.query
     const {
       patientId,
+      patientType,
+      childPatientId,
       name,
       dateOfBirth,
       mobile,
@@ -28,6 +30,15 @@ handler.put(async (req, res) => {
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
+    if (patientType === 'Child') {
+      const check = await schemaName.findOne({
+        patientId: patientId.toUpperCase(),
+      })
+      if (!check)
+        return res.status(404).json({ error: 'Parent does not exist' })
+    }
+
+    object.patientType = patientType
     object.patientId = patientId
     object.name = name
     object.dateOfBirth = dateOfBirth
@@ -39,6 +50,16 @@ handler.put(async (req, res) => {
     object.updatedBy = req.user._id
     object.createdBy = req.user._id
     object.date = date
+
+    if (patientType === 'Child') {
+      object.trimester = undefined
+      object.childPatientId = childPatientId
+      object.status = undefined
+    }
+
+    if (patientType === 'Parent') {
+      object.childPatientId = undefined
+    }
 
     await object.save()
     res.status(200).json({ message: `${schemaNameString} updated` })

@@ -75,14 +75,36 @@ const FormPatients = ({
               <form onSubmit={handleSubmit(submitHandler)}>
                 <div className='row'>
                   <div className='col-md-6 col-12'>
+                    {staticInputSelect({
+                      register,
+                      errors,
+                      label: 'Patient Type',
+                      name: 'patientType',
+                      placeholder: 'Patient Type',
+                      data: [{ name: 'Parent' }, { name: 'Child' }],
+                    })}
+                  </div>
+                  {watch().patientType === 'Child' && (
+                    <div className='col-md-6 col-12'>
+                      {inputText({
+                        register,
+                        errors,
+                        label: 'Child Patient ID',
+                        name: 'childPatientId',
+                        placeholder: 'Child Patient ID',
+                      })}
+                    </div>
+                  )}
+                  <div className='col-md-6 col-12'>
                     {inputText({
                       register,
                       errors,
-                      label: 'Patient ID',
+                      label: 'Parent Patient ID',
                       name: 'patientId',
-                      placeholder: 'Patient ID',
+                      placeholder: 'Parent Patient ID',
                     })}
                   </div>
+
                   <div className='col-md-6 col-12'>
                     {inputText({
                       register,
@@ -120,25 +142,29 @@ const FormPatients = ({
                       data: districts,
                     })}
                   </div>
-                  <div className='col-md-6 col-12'>
-                    {inputNumber({
-                      register,
-                      errors,
-                      label: 'Trimester',
-                      name: 'trimester',
-                      placeholder: 'Trimester',
-                    })}
-                  </div>
-                  <div className='col-md-6 col-12'>
-                    {staticInputSelect({
-                      register,
-                      errors,
-                      label: 'Status',
-                      name: 'status',
-                      placeholder: 'Status',
-                      data: [{ name: 'Married' }, { name: 'Divorced' }],
-                    })}
-                  </div>
+                  {watch().patientType === 'Parent' && (
+                    <>
+                      <div className='col-md-6 col-12'>
+                        {inputNumber({
+                          register,
+                          errors,
+                          label: 'Trimester',
+                          name: 'trimester',
+                          placeholder: 'Trimester',
+                        })}
+                      </div>
+                      <div className='col-md-6 col-12'>
+                        {staticInputSelect({
+                          register,
+                          errors,
+                          label: 'Status',
+                          name: 'status',
+                          placeholder: 'Status',
+                          data: [{ name: 'Married' }, { name: 'Divorced' }],
+                        })}
+                      </div>
+                    </>
+                  )}
                   <div className='col-md-6 col-12'>
                     {inputDate({
                       register,

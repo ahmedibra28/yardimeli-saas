@@ -36,7 +36,9 @@ const ViewPatients = ({
       <table className='table table-sm table-border'>
         <thead className='border-0'>
           <tr>
-            <th>ID</th>
+            <th>Patient Type</th>
+            <th>Parent</th>
+            <th>Child</th>
             <th>Name</th>
             <th>Age</th>
             <th>Status</th>
@@ -52,11 +54,25 @@ const ViewPatients = ({
           {data &&
             data.data.map((patient) => (
               <tr key={patient._id}>
+                <td>{patient?.patientType}</td>
                 <td>{patient.patientId}</td>
+                <td>
+                  {patient?.childPatientId ? (
+                    patient?.childPatientId
+                  ) : (
+                    <span className='badge bg-danger'>N/A</span>
+                  )}
+                </td>
                 <td>{patient.name}</td>
                 <td>{moment().diff(patient.dateOfBirth, 'years')} years</td>
-                <td>{patient.status}</td>
-                <td>{patient.trimester}</td>
+                <td>{patient.status ? patient?.status : 'Child'}</td>
+                <td>
+                  {patient.trimester ? (
+                    patient?.trimester
+                  ) : (
+                    <span className='badge bg-danger'>N/A</span>
+                  )}
+                </td>
                 <td>{patient.mobile}</td>
                 <td>{patient.district}</td>
                 <td>

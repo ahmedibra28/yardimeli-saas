@@ -42,6 +42,7 @@ const Deliveries = () => {
   } = useForm({
     defaultValues: {
       isActive: true,
+      breastSucking: true,
     },
   })
 
@@ -135,6 +136,15 @@ const Deliveries = () => {
       'date',
       moment(delivery?.postDelivery?.date).format('YYYY-MM-DD HH:mm')
     )
+    setValue('childPatientId', delivery?.baby?.childPatientId)
+    setValue('doctor', delivery?.baby?.doctor)
+    setValue('gestationalAge', delivery?.baby?.gestationalAge)
+    setValue('gender', delivery?.baby?.gender)
+    setValue('noOfBabies', delivery?.baby?.noOfBabies)
+    setValue('childStatus', delivery?.baby?.childStatus)
+    setValue('apgarScore', delivery?.baby?.apgarScore)
+    setValue('weight', delivery?.baby?.weight)
+    setValue('breastSucking', delivery?.baby?.breastSucking)
 
     setValue(
       'postDate',

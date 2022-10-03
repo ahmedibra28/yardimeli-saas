@@ -23,7 +23,12 @@ handler.get(async (req, res) => {
 
     const pages = Math.ceil(total / pageSize)
 
-    query = query.skip(skip).limit(pageSize).sort({ date: -1 }).lean()
+    query = query
+      .skip(skip)
+      .limit(pageSize)
+      .sort({ date: -1 })
+      .lean()
+      .sort({ createdAt: 1 })
 
     const result = await query
 
@@ -44,6 +49,14 @@ handler.get(async (req, res) => {
 handler.post(async (req, res) => {
   await db()
   try {
+    const { patientId, patientType } = req.body
+    if (patientType === 'Child') {
+      const check = await schemaName.findOne({
+        patientId: patientId.toUpperCase(),
+      })
+      if (!check)
+        return res.status(404).json({ error: 'Parent does not exist' })
+    }
     const object = await schemaName.create({
       ...req.body,
       createdBy: req.user._id,

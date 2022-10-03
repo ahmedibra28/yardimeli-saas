@@ -338,6 +338,96 @@ const FormDeliveries = ({
                   </div>
                 </div>
 
+                <hr />
+                <div className='row'>
+                  <h6 className='font-monospace fw-bold text-uppercase'>
+                    Baby
+                  </h6>
+                  <div className='col-lg-4 col-md-6 col-12'>
+                    {inputText({
+                      register,
+                      label: 'Child Patient ID',
+                      placeholder: 'Child Patient ID',
+                      errors,
+                      name: 'childPatientId',
+                    })}
+                  </div>
+                  <div className='col-lg-4 col-md-6 col-12'>
+                    {inputText({
+                      register,
+                      label: 'Doctor name',
+                      placeholder: 'Doctor name',
+                      errors,
+                      name: 'doctor',
+                    })}
+                  </div>
+                  <div className='col-lg-4 col-md-6 col-12'>
+                    {inputText({
+                      register,
+                      label: 'Gestational Age',
+                      placeholder: 'Gestational Age',
+                      errors,
+                      name: 'gestationalAge',
+                    })}
+                  </div>
+                  <div className='col-lg-4 col-md-6 col-12'>
+                    {inputText({
+                      register,
+                      label: 'Gender',
+                      placeholder: 'Gender',
+                      errors,
+                      name: 'gender',
+                    })}
+                  </div>
+                  <div className='col-lg-4 col-md-6 col-12'>
+                    {inputNumber({
+                      register,
+                      label: 'Number of Babies',
+                      placeholder: 'Number of Babies',
+                      errors,
+                      name: 'noOfBabies',
+                    })}
+                  </div>
+                  <div className='col-lg-4 col-md-6 col-12'>
+                    {staticInputSelect({
+                      register,
+                      label: 'Child Status',
+                      placeholder: 'Child Status',
+                      errors,
+                      name: 'childStatus',
+                      data: [{ name: 'Alive' }, { name: 'Death' }],
+                    })}
+                  </div>
+                  <div className='col-lg-4 col-md-6 col-12'>
+                    {inputText({
+                      register,
+                      label: 'Apgar Score',
+                      placeholder: 'Apgar Score',
+                      errors,
+                      name: 'apgarScore',
+                    })}
+                  </div>
+                  <div className='col-lg-4 col-md-6 col-12'>
+                    {inputText({
+                      register,
+                      label: 'Weight',
+                      placeholder: 'Weight',
+                      errors,
+                      name: 'weight',
+                    })}
+                  </div>
+                  <div className='col-12'>
+                    {inputCheckBox({
+                      register,
+                      label: 'Breast Sucking',
+                      placeholder: 'Breast Sucking',
+                      errors,
+                      name: 'breastSucking',
+                      isRequired: false,
+                    })}
+                  </div>
+                </div>
+
                 <div className='modal-footer'>
                   <button
                     type='button'

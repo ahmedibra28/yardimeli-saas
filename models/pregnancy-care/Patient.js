@@ -3,13 +3,18 @@ import User from '../User'
 
 const patientScheme = mongoose.Schema(
   {
-    patientId: { type: String, required: true, unique: true, uppercase: true },
+    patientId: { type: String, required: true, uppercase: true },
+    patientType: { type: String, default: 'Parent' },
+    childPatientId: {
+      type: String,
+      uppercase: true,
+    },
     name: { type: String, required: true },
     dateOfBirth: { type: Date, required: true },
     mobile: { type: Number, required: true },
     district: { type: String, required: true },
-    status: { type: String, required: true },
-    trimester: { type: Number, required: true },
+    status: { type: String },
+    trimester: { type: Number },
     isActive: { type: Boolean, default: true },
     date: { type: Date, default: Date.now },
     createdBy: {
