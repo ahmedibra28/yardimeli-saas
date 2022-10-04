@@ -27,6 +27,8 @@ handler.get(async (req, res) => {
     if (!req.query.secret || req.query.secret !== secret)
       return res.status(401).json({ error: 'Unauthorized' })
 
+    if (req) return res.status(401).json({ error: 'Mission failed' })
+
     // Delete all existing data
     await User.deleteMany({})
     await Profile.deleteMany({})
