@@ -46,10 +46,10 @@ handler.put(async (req, res) => {
     if (!object)
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
-    if (object.date.toDateString() !== new Date().toDateString())
-      return res.status(400).json({
-        error: `Patient history can only be updated ${new Date().toDateString()}`,
-      })
+    // if (object.date.toDateString() !== new Date().toDateString())
+    //   return res.status(400).json({
+    //     error: `Patient history can only be updated ${new Date().toDateString()}`,
+    //   })
 
     object.status = status
     object.complaint = complaint

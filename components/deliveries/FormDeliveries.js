@@ -71,6 +71,17 @@ const FormDeliveries = ({
                     })}
                   </div>
                   <div className='col-lg-4 col-md-6 col-12'>
+                    {staticInputSelect({
+                      register,
+                      label: 'Patient Doctor',
+                      errors,
+                      name: 'patientDoctor',
+                      placeholder: 'patient doctor',
+                      value: 'patientDoctor',
+                      data: [{ name: 'Dr Oksana' }, { name: 'Dr Mashhura' }],
+                    })}
+                  </div>
+                  <div className='col-lg-4 col-md-6 col-12'>
                     {inputText({
                       register,
                       label: 'Gravida',
@@ -156,6 +167,7 @@ const FormDeliveries = ({
                         { name: 'Meconium' },
                         { name: 'Blood' },
                         { name: 'Clear' },
+                        { name: 'Intact' },
                       ],
                     })}
                   </div>
@@ -180,8 +192,8 @@ const FormDeliveries = ({
                   <div className='col-lg-4 col-md-6 col-12'>
                     {inputText({
                       register,
-                      label: 'Vital Sign',
-                      placeholder: 'Vital Sign',
+                      label: 'Blood Pressure',
+                      placeholder: 'Blood Pressure',
                       errors,
                       name: 'vitalSign',
                     })}
@@ -207,8 +219,8 @@ const FormDeliveries = ({
                   <div className='col-lg-4 col-md-6 col-12'>
                     {inputDateTime({
                       register,
-                      label: 'Pre Delivery Date',
-                      placeholder: 'Pre Delivery Date',
+                      label: 'Admission Date',
+                      placeholder: 'Admission Date',
                       errors,
                       name: 'date',
                     })}
@@ -223,8 +235,8 @@ const FormDeliveries = ({
                   <div className='col-lg-4 col-md-6 col-12'>
                     {inputDateTime({
                       register,
-                      label: 'Post Delivery Date',
-                      placeholder: 'Post Delivery Date',
+                      label: 'Delivery Date',
+                      placeholder: 'Delivery Date',
                       errors,
                       name: 'postDate',
                     })}
@@ -246,7 +258,11 @@ const FormDeliveries = ({
                       placeholder: 'Delivery Mode',
                       errors,
                       name: 'mode',
-                      data: [{ name: 'Induction' }, { name: 'Spontaneous' }],
+                      data: [
+                        { name: 'Induction' },
+                        { name: 'Spontaneous' },
+                        { name: 'C/Section' },
+                      ],
                     })}
                   </div>
                   <div className='col-12'>

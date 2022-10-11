@@ -5,6 +5,11 @@ import Patient from './Patient'
 const deliveryScheme = mongoose.Schema(
   {
     patient: { type: mongoose.Schema.Types.ObjectId, ref: Patient },
+    patientDoctor: {
+      type: String,
+      default: 'Dr Oksana',
+      enum: ['Dr Oksana', 'Dr Mashhura'],
+    },
     preDelivery: {
       date: { type: Date, required: true },
       gravida: { type: String, required: true },
@@ -18,7 +23,7 @@ const deliveryScheme = mongoose.Schema(
       membrance: {
         type: String,
         required: true,
-        enum: ['Rupture', 'Meconium', 'Blood', 'Clear'],
+        enum: ['Rupture', 'Meconium', 'Blood', 'Clear', 'Intact'],
       },
       contraction: { type: String, required: true },
       fetalHeart: { type: String, required: true },
@@ -32,7 +37,7 @@ const deliveryScheme = mongoose.Schema(
       mode: {
         type: String,
         required: true,
-        enum: ['Induction', 'Spontaneous'],
+        enum: ['Induction', 'Spontaneous', 'C/Section'],
       },
       episiotomy: { type: Boolean, required: true },
       repair: { type: Boolean, required: true },

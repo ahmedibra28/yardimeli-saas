@@ -15,6 +15,7 @@ handler.put(async (req, res) => {
     const { id } = req.query
     const {
       patient,
+      patientDoctor,
       isActive,
       date,
       gravida,
@@ -105,6 +106,7 @@ handler.put(async (req, res) => {
     if (!patients) return res.status(404).json({ error: 'Patient not found' })
 
     object.patient = patient
+    object.patientDoctor = patientDoctor
     object.preDelivery = preDelivery
     object.postDelivery = postDelivery
     object.baby = baby

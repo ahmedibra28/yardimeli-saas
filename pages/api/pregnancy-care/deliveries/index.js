@@ -55,6 +55,7 @@ handler.post(async (req, res) => {
   try {
     const {
       patient,
+      patientDoctor,
       isActive,
       date,
       gravida,
@@ -143,6 +144,7 @@ handler.post(async (req, res) => {
 
     const object = await schemaName.create({
       patient,
+      patientDoctor,
       preDelivery,
       postDelivery,
       baby,

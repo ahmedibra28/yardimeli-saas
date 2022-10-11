@@ -117,6 +117,7 @@ const Deliveries = () => {
     setEdit(true)
     setValue('isActive', delivery.isActive)
     setValue('patient', delivery?.patient?._id)
+    setValue('patientDoctor', delivery?.patientDoctor)
 
     setValue('gravida', delivery?.preDelivery?.gravida)
     setValue('para', delivery?.preDelivery?.para)
