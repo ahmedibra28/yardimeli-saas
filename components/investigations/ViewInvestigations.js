@@ -1,4 +1,4 @@
-import { FaTrash, FaChartPie } from 'react-icons/fa'
+import { FaTrash, FaChartPie, FaPenAlt } from 'react-icons/fa'
 import { Search } from '..'
 import moment from 'moment'
 
@@ -10,6 +10,7 @@ const ViewInvestigations = ({
   setQ,
   q,
   searchHandler,
+  editHandler,
 }) => {
   return (
     <div className='table-responsive bg-light p-3 mt-2'>
@@ -98,6 +99,14 @@ const ViewInvestigations = ({
                       </button>
                     </>
                   )}
+                  <button
+                    className='btn btn-primary btn-sm rounded-pill'
+                    onClick={() => editHandler(investigation)}
+                    data-bs-toggle='modal'
+                    data-bs-target='#investigationModal'
+                  >
+                    <FaPenAlt />
+                  </button>
                 </td>
               </tr>
             ))}

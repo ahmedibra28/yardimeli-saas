@@ -20,17 +20,24 @@ import {
 } from '../../../components'
 import { FaPrint } from 'react-icons/fa'
 import { useReactToPrint } from 'react-to-print'
+import moment from 'moment'
 
 const Investigations = () => {
   const [page, setPage] = useState(1)
   const [q, setQ] = useState('')
   const [investigations, setInvestigations] = useState({})
+  const [edit, setEdit] = useState(false)
+  const [editableValue, setEditableValue] = useState(null)
 
-  const { getInvestigations, postInvestigation, deleteInvestigation } =
-    useInvestigationsHook({
-      page,
-      q,
-    })
+  const {
+    getInvestigations,
+    postInvestigation,
+    deleteInvestigation,
+    updateInvestigation,
+  } = useInvestigationsHook({
+    page,
+    q,
+  })
 
   const { getPatients } = usePatientsHook({ limit: 1000 })
   const { getImages } = useImagesHook({ limit: 1000 })
@@ -42,6 +49,7 @@ const Investigations = () => {
     handleSubmit,
     watch,
     reset,
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -71,8 +79,18 @@ const Investigations = () => {
     mutateAsync: mutateAsyncPost,
   } = postInvestigation
 
+  const {
+    isLoading: isLoadingUpdate,
+    isError: isErrorUpdate,
+    error: errorUpdate,
+    isSuccess: isSuccessUpdate,
+    mutateAsync: mutateAsyncUpdate,
+  } = updateInvestigation
+
   const formCleanHandler = () => {
     reset()
+    setEdit(false)
+    setEditableValue(null)
   }
 
   useEffect(() => {
@@ -101,7 +119,9 @@ const Investigations = () => {
   }
 
   const submitHandler = (data) => {
-    mutateAsyncPost(data)
+    edit
+      ? mutateAsyncUpdate({ _id: editableValue?._id, date: data?.date })
+      : mutateAsyncPost(data)
   }
 
   const componentRef = useRef()
@@ -109,6 +129,12 @@ const Investigations = () => {
     content: () => componentRef.current,
     documentTitle: 'Investigation',
   })
+
+  const editHandler = (item) => {
+    setValue('date', moment(item?.date).format('YYYY-MM-DD'))
+    setEdit(true)
+    setEditableValue(item)
+  }
 
   return (
     <>
@@ -129,6 +155,13 @@ const Investigations = () => {
       )}
       {isErrorPost && <Message variant='danger'>{errorPost}</Message>}
 
+      {isSuccessUpdate && (
+        <Message variant='success'>
+          Investigation has been updated successfully.
+        </Message>
+      )}
+      {isErrorUpdate && <Message variant='danger'>{errorUpdate}</Message>}
+
       <FormInvestigations
         formCleanHandler={formCleanHandler}
         isLoading={isLoading}
@@ -144,6 +177,7 @@ const Investigations = () => {
         dataImage={dataImage && dataImage.data}
         dataLabTest={dataLabTest && dataLabTest.data}
         dataVaccination={dataVaccination && dataVaccination.data}
+        edit={edit}
       />
 
       <div className='ms-auto text-end'>
@@ -163,6 +197,8 @@ const Investigations = () => {
           setQ={setQ}
           q={q}
           searchHandler={searchHandler}
+          isLoadingUpdate={isLoadingUpdate}
+          editHandler={editHandler}
         />
       )}
 

@@ -22,6 +22,7 @@ const FormInvestigations = ({
   dataImage,
   dataLabTest,
   dataVaccination,
+  edit,
 }) => {
   return (
     <div
@@ -37,7 +38,7 @@ const FormInvestigations = ({
         <div className='modal-content modal-background'>
           <div className='modal-header'>
             <h3 className='modal-title ' id='investigationModalLabel'>
-              Post Investigation
+              {edit ? 'Update' : 'New'} Investigation
             </h3>
             <button
               type='button'
@@ -54,144 +55,164 @@ const FormInvestigations = ({
               <Message variant='danger'>{error}</Message>
             ) : (
               <form onSubmit={handleSubmit(submitHandler)}>
-                <div className='row'>
-                  <div className='col-md-6 col-12'>
-                    {InputAutoCompleteSelect({
-                      register,
-                      label: 'Patient',
-                      errors,
-                      name: 'patient',
-                      placeholder: 'patient',
-                      value: 'patientId',
-                      data:
-                        dataPatient && dataPatient.filter((p) => p.isActive),
-                    })}
+                {edit ? (
+                  <div className='row'>
+                    <div className='col-md-6 col-12'>
+                      {inputDate({
+                        register,
+                        errors,
+                        label: 'Date',
+                        name: 'date',
+                        placeholder: 'Date',
+                      })}
+                    </div>
                   </div>
-                  <div className='col-md-6 col-12'>
-                    {inputDate({
-                      register,
-                      errors,
-                      label: 'Date',
-                      name: 'date',
-                      placeholder: 'Date',
-                    })}
-                  </div>
-                  <div className='col-12 text-center'>
-                    <label htmlFor=''>
-                      Please, select any investigation type to request it
-                    </label>
+                ) : (
+                  <>
+                    <div className='row'>
+                      <div className='col-md-6 col-12'>
+                        {InputAutoCompleteSelect({
+                          register,
+                          label: 'Patient',
+                          errors,
+                          name: 'patient',
+                          placeholder: 'patient',
+                          value: 'patientId',
+                          data:
+                            dataPatient &&
+                            dataPatient.filter((p) => p.isActive),
+                        })}
+                      </div>
+                      <div className='col-md-6 col-12'>
+                        {inputDate({
+                          register,
+                          errors,
+                          label: 'Date',
+                          name: 'date',
+                          placeholder: 'Date',
+                        })}
+                      </div>
+                      <div className='col-12 text-center'>
+                        <label htmlFor=''>
+                          Please, select any investigation type to request it
+                        </label>
+                        <hr />
+                      </div>
+                      <div className='col-md-4 col-12'>
+                        <div className='form-check'>
+                          <input
+                            className='form-check-input rounded-pill'
+                            {...register('investigationType')}
+                            type='radio'
+                            id='laboratory'
+                            value='laboratory'
+                          />
+                          <label
+                            className='form-check-label ms-1'
+                            htmlFor='laboratory'
+                          >
+                            Laboratory
+                          </label>
+                        </div>
+                      </div>
+                      <div className='col-md-4 col-12'>
+                        <div className='form-check'>
+                          <input
+                            className='form-check-input rounded-pill'
+                            {...register('investigationType')}
+                            type='radio'
+                            id='image'
+                            value='image'
+                          />
+                          <label
+                            className='form-check-label ms-1'
+                            htmlFor='image'
+                          >
+                            Image
+                          </label>
+                        </div>
+                      </div>
+                      <div className='col-md-4 col-12'>
+                        <div className='form-check'>
+                          <input
+                            className='form-check-input rounded-pill'
+                            {...register('investigationType')}
+                            type='radio'
+                            id='vaccination'
+                            value='vaccination'
+                          />
+                          <label
+                            className='form-check-label ms-1'
+                            htmlFor='vaccination'
+                          >
+                            Vaccination
+                          </label>
+                        </div>
+                      </div>
+                      <div className='col-12 text-center'>
+                        {errors && errors.investigationType && (
+                          <span className='text-danger'>
+                            {errors.investigationType.message}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+
                     <hr />
-                  </div>
-                  <div className='col-md-4 col-12'>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input rounded-pill'
-                        {...register('investigationType')}
-                        type='radio'
-                        id='laboratory'
-                        value='laboratory'
-                      />
-                      <label
-                        className='form-check-label ms-1'
-                        htmlFor='laboratory'
-                      >
-                        Laboratory
-                      </label>
-                    </div>
-                  </div>
-                  <div className='col-md-4 col-12'>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input rounded-pill'
-                        {...register('investigationType')}
-                        type='radio'
-                        id='image'
-                        value='image'
-                      />
-                      <label className='form-check-label ms-1' htmlFor='image'>
-                        Image
-                      </label>
-                    </div>
-                  </div>
-                  <div className='col-md-4 col-12'>
-                    <div className='form-check'>
-                      <input
-                        className='form-check-input rounded-pill'
-                        {...register('investigationType')}
-                        type='radio'
-                        id='vaccination'
-                        value='vaccination'
-                      />
-                      <label
-                        className='form-check-label ms-1'
-                        htmlFor='vaccination'
-                      >
-                        Vaccination
-                      </label>
-                    </div>
-                  </div>
-                  <div className='col-12 text-center'>
-                    {errors && errors.investigationType && (
-                      <span className='text-danger'>
-                        {errors.investigationType.message}
-                      </span>
+
+                    {watch().investigationType === 'laboratory' && (
+                      <div className='row gy-3'>
+                        <div className='col-lg-3.col-md-4.col-6 mx-auto'>
+                          {inputMultipleCheckBox({
+                            register,
+                            label: 'Laboratory Tests',
+                            placeholder: 'Laboratory Tests',
+                            errors,
+                            name: 'labTests',
+                            data:
+                              dataLabTest &&
+                              dataLabTest.filter((test) => test.isActive),
+                          })}
+                        </div>
+                      </div>
                     )}
-                  </div>
-                </div>
 
-                <hr />
+                    {watch().investigationType === 'image' && (
+                      <div className='row gy-3'>
+                        <div className='col-lg-3.col-md-4.col-6 mx-auto'>
+                          {inputMultipleCheckBox({
+                            register,
+                            label: 'Images',
+                            placeholder: 'Images',
+                            errors,
+                            name: 'images',
+                            data:
+                              dataImage &&
+                              dataImage.filter((image) => image.isActive),
+                          })}
+                        </div>
+                      </div>
+                    )}
 
-                {watch().investigationType === 'laboratory' && (
-                  <div className='row gy-3'>
-                    <div className='col-lg-3.col-md-4.col-6 mx-auto'>
-                      {inputMultipleCheckBox({
-                        register,
-                        label: 'Laboratory Tests',
-                        placeholder: 'Laboratory Tests',
-                        errors,
-                        name: 'labTests',
-                        data:
-                          dataLabTest &&
-                          dataLabTest.filter((test) => test.isActive),
-                      })}
-                    </div>
-                  </div>
-                )}
-
-                {watch().investigationType === 'image' && (
-                  <div className='row gy-3'>
-                    <div className='col-lg-3.col-md-4.col-6 mx-auto'>
-                      {inputMultipleCheckBox({
-                        register,
-                        label: 'Images',
-                        placeholder: 'Images',
-                        errors,
-                        name: 'images',
-                        data:
-                          dataImage &&
-                          dataImage.filter((image) => image.isActive),
-                      })}
-                    </div>
-                  </div>
-                )}
-
-                {watch().investigationType === 'vaccination' && (
-                  <div className='row gy-3'>
-                    <div className='col-lg-3.col-md-4.col-6 mx-auto'>
-                      {inputMultipleCheckBox({
-                        register,
-                        label: 'Vaccination',
-                        placeholder: 'Vaccination',
-                        errors,
-                        name: 'vaccinations',
-                        data:
-                          dataVaccination &&
-                          dataVaccination.filter(
-                            (vaccination) => vaccination.isActive
-                          ),
-                      })}
-                    </div>
-                  </div>
+                    {watch().investigationType === 'vaccination' && (
+                      <div className='row gy-3'>
+                        <div className='col-lg-3.col-md-4.col-6 mx-auto'>
+                          {inputMultipleCheckBox({
+                            register,
+                            label: 'Vaccination',
+                            placeholder: 'Vaccination',
+                            errors,
+                            name: 'vaccinations',
+                            data:
+                              dataVaccination &&
+                              dataVaccination.filter(
+                                (vaccination) => vaccination.isActive
+                              ),
+                          })}
+                        </div>
+                      </div>
+                    )}
+                  </>
                 )}
 
                 <div className='modal-footer'>

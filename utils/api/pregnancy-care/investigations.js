@@ -32,9 +32,18 @@ export default function useInvestigationsHook(props) {
     }
   )
 
+  const updateInvestigation = useMutation(
+    async (obj) => await dynamicAPI('put', `${url}/${obj?._id}`, obj),
+    {
+      retry: 0,
+      onSuccess: () => queryClient.invalidateQueries([queryKey]),
+    }
+  )
+
   return {
     getInvestigations,
     deleteInvestigation,
     postInvestigation,
+    updateInvestigation,
   }
 }

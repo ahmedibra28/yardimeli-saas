@@ -865,6 +865,13 @@ const permissions = [
     method: 'POST',
   },
   {
+    description: 'Update Investigations',
+    route: '/api/pregnancy-care/investigation/investigations/:id',
+    auth: true,
+    name: 'Investigations',
+    method: 'PUT',
+  },
+  {
     description: 'Delete Investigations',
     route: '/api/pregnancy-care/investigation/investigations/:id',
     auth: true,
