@@ -135,8 +135,9 @@ const Deliveries = () => {
     setValue('temperature', delivery?.preDelivery?.temperature)
     setValue(
       'date',
-      moment(delivery?.postDelivery?.date).format('YYYY-MM-DD HH:mm')
+      moment(delivery?.preDelivery?.date).format('YYYY-MM-DD HH:mm')
     )
+
     setValue('childPatientId', delivery?.baby?.childPatientId)
     setValue('doctor', delivery?.baby?.doctor)
     setValue('gestationalAge', delivery?.baby?.gestationalAge)
