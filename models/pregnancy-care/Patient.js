@@ -3,9 +3,9 @@ import User from '../User'
 
 const patientScheme = mongoose.Schema(
   {
-    patientId: { type: String, required: true, uppercase: true },
+    patientId: { type: String, required: true, uppercase: true, unique: true },
     patientType: { type: String, default: 'Parent' },
-    childPatientId: {
+    reference: {
       type: String,
       uppercase: true,
     },

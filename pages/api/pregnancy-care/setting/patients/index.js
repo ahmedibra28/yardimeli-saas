@@ -49,16 +49,37 @@ handler.get(async (req, res) => {
 handler.post(async (req, res) => {
   await db()
   try {
-    const { patientId, patientType } = req.body
+    const {
+      patientId,
+      patientType,
+      reference,
+      name,
+      dateOfBirth,
+      mobile,
+      district,
+      status,
+      date,
+    } = req.body
     if (patientType === 'Child') {
       const check = await schemaName.findOne({
-        patientId: patientId.toUpperCase(),
+        patientId: reference.toUpperCase(),
+        patientType: 'Parent',
       })
       if (!check)
         return res.status(404).json({ error: 'Parent does not exist' })
     }
     const object = await schemaName.create({
-      ...req.body,
+      patientId,
+      patientType,
+      reference,
+      name,
+      dateOfBirth,
+      mobile,
+      district,
+      status,
+      date,
+      trimester: patientType === 'Child' ? undefined : trimester,
+      isActive: true,
       createdBy: req.user._id,
     })
     res.status(200).send(object)

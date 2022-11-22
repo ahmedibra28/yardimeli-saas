@@ -89,9 +89,9 @@ const FormPatients = ({
                       {inputText({
                         register,
                         errors,
-                        label: 'Child Patient ID',
-                        name: 'childPatientId',
-                        placeholder: 'Child Patient ID',
+                        label: 'Parent ID',
+                        name: 'reference',
+                        placeholder: 'Parent ID',
                       })}
                     </div>
                   )}
@@ -99,9 +99,9 @@ const FormPatients = ({
                     {inputText({
                       register,
                       errors,
-                      label: 'Parent Patient ID',
+                      label: 'Patient ID',
                       name: 'patientId',
-                      placeholder: 'Parent Patient ID',
+                      placeholder: 'Patient ID',
                     })}
                   </div>
 

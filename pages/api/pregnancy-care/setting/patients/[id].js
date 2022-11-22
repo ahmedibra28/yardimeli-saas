@@ -15,7 +15,7 @@ handler.put(async (req, res) => {
     const {
       patientId,
       patientType,
-      childPatientId,
+      reference,
       name,
       dateOfBirth,
       mobile,
@@ -32,7 +32,8 @@ handler.put(async (req, res) => {
 
     if (patientType === 'Child') {
       const check = await schemaName.findOne({
-        patientId: patientId.toUpperCase(),
+        patientId: reference.toUpperCase(),
+        patientType: 'Parent',
       })
       if (!check)
         return res.status(404).json({ error: 'Parent does not exist' })
@@ -45,21 +46,12 @@ handler.put(async (req, res) => {
     object.mobile = mobile
     object.district = district
     object.status = status
-    object.trimester = trimester
     object.isActive = isActive
     object.updatedBy = req.user._id
     object.createdBy = req.user._id
     object.date = date
-
-    if (patientType === 'Child') {
-      object.trimester = undefined
-      object.childPatientId = childPatientId
-      object.status = undefined
-    }
-
-    if (patientType === 'Parent') {
-      object.childPatientId = undefined
-    }
+    object.trimester = patientType === 'Child' ? undefined : trimester
+    object.reference = patientType === 'Child' ? reference : undefined
 
     await object.save()
     res.status(200).json({ message: `${schemaNameString} updated` })

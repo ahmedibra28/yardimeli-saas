@@ -109,7 +109,7 @@ const Patients = () => {
     setId(patient._id)
     setEdit(true)
     setValue('patientId', patient.patientId)
-    setValue('childPatientId', patient?.childPatientId)
+    setValue('reference', patient?.reference)
     setValue('patientType', patient?.patientType)
     setValue('name', patient.name)
     setValue('dateOfBirth', moment(patient.dateOfBirth).format('YYYY-MM-DD'))

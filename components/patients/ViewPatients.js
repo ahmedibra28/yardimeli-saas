@@ -37,8 +37,8 @@ const ViewPatients = ({
         <thead className='border-0'>
           <tr>
             <th>Patient Type</th>
-            <th>Parent</th>
-            <th>Child</th>
+            <th>Patient ID</th>
+            <th>Reference</th>
             <th>Name</th>
             <th>Age</th>
             <th>Status</th>
@@ -57,8 +57,8 @@ const ViewPatients = ({
                 <td>{patient?.patientType}</td>
                 <td>{patient.patientId}</td>
                 <td>
-                  {patient?.childPatientId ? (
-                    patient?.childPatientId
+                  {patient?.reference ? (
+                    patient?.reference
                   ) : (
                     <span className='badge bg-danger'>N/A</span>
                   )}
