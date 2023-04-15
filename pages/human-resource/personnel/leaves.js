@@ -152,7 +152,7 @@ const Leaves = () => {
       label: 'Employee',
       name: 'employee',
       placeholder: 'Enter employee',
-      data: employeeData?.data,
+      data: employeeData?.data?.filter((item) => item.status === 'active'),
       value: 'employeeId',
     }),
     staticInputSelect({
@@ -167,8 +167,8 @@ const Leaves = () => {
         { name: 'Public holiday' },
         { name: 'Religious holidays' },
         { name: 'Maternity leave' },
-        { name: 'Paternity leave' },
         { name: 'Bereavement leave' },
+        { name: 'Paternity leave' },
         { name: 'Compensatory leave' },
         { name: 'Sabbatical leave' },
         { name: 'Unpaid Leave' },

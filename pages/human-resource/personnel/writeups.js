@@ -151,7 +151,7 @@ const WriteUps = () => {
       label: 'Employee',
       name: 'employee',
       placeholder: 'Enter employee',
-      data: employeeData?.data,
+      data: employeeData?.data?.filter((item) => item.status === 'active'),
       value: 'employeeId',
     }),
     staticInputSelect({

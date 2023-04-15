@@ -14,7 +14,7 @@ handler.post(async (req, res) => {
     if (!department)
       return res.status(404).json({ error: 'Department is required' })
 
-    const employees = await Employee.find({ department })
+    const employees = await Employee.find({ department, status: 'active' })
       .lean()
       .sort({ status: -1 })
       .populate('department', ['name'])
