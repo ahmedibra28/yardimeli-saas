@@ -67,7 +67,7 @@ handler.post(async (req, res) => {
   await db()
   try {
     const employee = await Employee.findOne({
-      employee: req.body.employee,
+      _id: req.body.employee,
       status: 'active',
     })
     if (!employee)
@@ -78,10 +78,10 @@ handler.post(async (req, res) => {
       createdBy: req.user.id,
     })
 
-    if (object) {
-      employee.status = 'resigned'
-      await employee.save()
-    }
+    if (!object) return res.status(400).send({ error: 'Resignation failed' })
+
+    employee.status = 'resigned'
+    await employee.save()
     res.status(200).send(object)
   } catch (error) {
     res.status(500).json({ error: error.message })

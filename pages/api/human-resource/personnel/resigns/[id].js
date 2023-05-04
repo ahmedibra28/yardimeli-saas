@@ -24,7 +24,11 @@ handler.put(async (req, res) => {
     object.reason = reason
     object.date = date
     object.updatedBy = req.user.id
-    await object.save()
+    // await object.save()
+    return res.status(400).json({
+      error:
+        'Editing is not allowed, please delete this employee if you are editing',
+    })
     res.status(200).json({ message: `${schemaNameString} updated` })
   } catch (error) {
     res.status(500).json({ error: error.message })
@@ -40,13 +44,13 @@ handler.delete(async (req, res) => {
       return res.status(400).json({ error: `${schemaNameString} not found` })
 
     const employee = await Employee.findOne({
-      employee: req.body.employee,
+      _id: object.employee,
     })
 
-    if (employee) {
-      employee.status = 'active'
-      await employee.save()
-    }
+    if (!employee) return res.status(404).json({ error: 'Employee not found' })
+
+    employee.status = 'active'
+    await employee.save()
 
     await object.remove()
     res.status(200).json({ message: `${schemaNameString} removed` })
